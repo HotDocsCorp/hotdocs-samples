@@ -40,14 +40,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HotDocs.Sdk">
-      <HintPath>..\SDK DLLs\HotDocs.Sdk.dll</HintPath>
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SDK DLLs\HotDocs.Sdk.Server.dll</HintPath>
+    <Reference Include="HotDocs.Sdk.Cloud">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Sdk.Server">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="HotDocs.Sdk.Server.Contracts">
-      <HintPath>..\SDK DLLs\HotDocs.Sdk.Server.Contracts.dll</HintPath>
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Server">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Server.Interop">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.Interop.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

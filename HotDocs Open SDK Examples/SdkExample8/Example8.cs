@@ -2,14 +2,15 @@
 using System.IO;
 using HotDocs.Sdk;
 using HotDocs.Sdk.Server;
-using HotDocs.Sdk.Server.Local;
+using HotDocs.Sdk.Server.Cloud;
 
-namespace SdkExample1
+namespace SdkExample8
 {
     /// <summary>
-    /// This demonstrates assembling a document from a template using HotDocs Server and assuming we already have answer XML
+    /// This demonstrates assembling a document from a template using HotDocs Cloud Services and assuming we already have answer XML.
+    /// This examples uses the same code as Example 1. Only the CreateHotDocsService method has changed.
     /// </summary>
-    internal class Example1
+    internal class Example8
     {
         private static void Main(string[] args)
         {
@@ -39,8 +40,8 @@ namespace SdkExample1
 
         private static Services CreateHotDocsService()
         {
-            const string tempDirectoryPath = @"C:\temp\";
-            var service = new Services(tempDirectoryPath);
+            // You must change the 'ExampleSubscriberId' and 'ExampleSubscriberKey' values to your own HotDocs Cloud Services identification information.
+            var service = new Services("ExampleSubscriberId", "ExampleSubscriberKey");
             return service;
         }
 
@@ -57,6 +58,6 @@ namespace SdkExample1
 
             var template = new Template(templateLocation);
             return template;
-        }     
+        }
     }
 }

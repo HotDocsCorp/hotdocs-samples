@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample6", "SdkExample6\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample7", "SdkExample7\SdkExample7.csproj", "{BF4813DC-FC2B-4447-BA59-F43B71621AA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample8", "SdkExample8\SdkExample8.csproj", "{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

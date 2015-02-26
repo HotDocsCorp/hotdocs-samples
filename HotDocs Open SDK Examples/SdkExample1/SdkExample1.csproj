@@ -48,10 +48,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HotDocs.Sdk">
-      <HintPath>..\SDK DLLs\HotDocs.Sdk.dll</HintPath>
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Sdk.Cloud">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="HotDocs.Sdk.Server">
-      <HintPath>..\SDK DLLs\HotDocs.Sdk.Server.dll</HintPath>
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Sdk.Server.Contracts">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Server">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HotDocs.Server.Interop">
+      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.Interop.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
