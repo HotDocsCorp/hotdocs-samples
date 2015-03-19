@@ -12,7 +12,7 @@ namespace SdkExample8
     /// </summary>
     internal class Example8
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             AssembleDocument();
         }

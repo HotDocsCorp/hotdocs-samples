@@ -33,28 +33,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HotDocs.Sdk">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="HotDocs.Sdk.Cloud">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
     </Reference>
     <Reference Include="HotDocs.Sdk.Server">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
     </Reference>
     <Reference Include="HotDocs.Sdk.Server.Contracts">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="HotDocs.Server">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.dll</HintPath>
     </Reference>
     <Reference Include="HotDocs.Server.Interop">
-      <HintPath>..\packages\HotDocsOpenSDK.0.9.6-beta\lib\HotDocs.Server.Interop.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.Interop.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
