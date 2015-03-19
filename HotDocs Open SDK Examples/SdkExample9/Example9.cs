@@ -18,7 +18,7 @@ namespace SdkExample9
     /// </summary>
     internal class Example9
     {
-        private static readonly string uriUpload = "http://localhost:80/HDSWEBAPI/api/HDCS/0/7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2";
+        private const string UriUpload = "http://localhost:80/HDSWEBAPI/api/HDCS/0/7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2";
 
         private static void Main()
         {
@@ -26,7 +26,7 @@ namespace SdkExample9
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri(uriUpload),
+                    RequestUri = new Uri(UriUpload),
                     Method = HttpMethod.Put,
                 };
                 using (var fs = File.OpenRead(@"C:\Temp\Demo.hdpkg"))
