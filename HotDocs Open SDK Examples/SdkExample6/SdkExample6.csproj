@@ -32,26 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HotDocs.Sdk">
+    <Reference Include="HotDocs.Sdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Cloud">
+    <Reference Include="HotDocs.Sdk.Cloud, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Server">
+    <Reference Include="HotDocs.Sdk.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Server.Contracts">
+    <Reference Include="HotDocs.Sdk.Server.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="HotDocs.Server">
+    <Reference Include="HotDocs.Server, Version=11.1.0.0, Culture=neutral, PublicKeyToken=5c9e421a71201d26, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="HotDocs.Server.Interop">
+    <Reference Include="HotDocs.Server.Interop, Version=11.1.0.0, Culture=neutral, PublicKeyToken=ca70e7f08f398355, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.Interop.dll</HintPath>
       <Private>True</Private>
     </Reference>
