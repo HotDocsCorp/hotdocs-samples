@@ -55,7 +55,7 @@ namespace SdkExample6
 
         private static Template CreateTemplate()
         {
-            const string packagePath = @"C:\temp\HelloWorld.hdpkg";
+            const string packagePath = @"C:\temp\Demo.hdpkg";
             string packageId = Guid.NewGuid().ToString();
             var templateLocation = new PackagePathTemplateLocation(packageId, packagePath);
 
