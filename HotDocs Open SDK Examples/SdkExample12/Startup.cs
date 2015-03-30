@@ -1,10 +1,10 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using SdkExample11;
+using SdkExample12;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace SdkExample11
+namespace SdkExample12
 {
     public partial class Startup
     {

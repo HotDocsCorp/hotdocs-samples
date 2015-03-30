@@ -7,9 +7,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataProtection;
-using SdkExample11.Models;
+using SdkExample12.Models;
 
-namespace SdkExample10
+namespace SdkExample12
 {
     public class EmailService : IIdentityMessageService
     {

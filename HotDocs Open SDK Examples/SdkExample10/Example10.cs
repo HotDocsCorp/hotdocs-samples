@@ -1,54 +1,73 @@
-﻿using System.IO;
-using HotDocs.Sdk;
-using HotDocs.Sdk.Server.OnPremise;
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace SdkExample10
 {
     /// <summary>
-    /// This demonstrates assembling a document from a template using the On Premise Web API. 
-    /// Assumes we already have answer XML
-    /// it assumes the package has already been uploaded there
+    ///     Upload a Template Package file using the On-Premise Service API
+    ///     If successful a folder named with the package id ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29 will be created 
+    ///     within the TempFiles folder of the On Premise API solution, within which should be the file Demo.hdpkg
     /// 
-    ///This will test assembling a document. The assembled document (output.docx) will be found in the bin/Debug folder and should contain the text ‘Hello World’.
-    ///To test the on premise web API replace the hardcoded host address passed into the OnPremiseServices class at line 23 with your relevant address.
-    ///In order for this to be successful the package must exist in the TempFiles folder in the on premise web API solution. 
-    ///It will be a package named ‘HelloWorld.hdpkg’ within a folder named by the package id ‘7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2’ unless
-    ///you alter these hardcoded values in the GetTemplate() method.
+    ///     This will test uploading the package named ‘HelloWorld.hdpkg’ to the on premise web API. 
+    ///     To test replace the hardcoded host address for uriUpload at line 21 with your relevant address.
+    ///     If successful, a folder named ‘ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29’ will be created inside the ‘TempFiles’ folder in the on premise web API solution. 
+    ///     Within that folder should be the actual package file ‘HelloWorld.hdpkg’.  If you replace the use of method CreateFileContent on line 34 with CreateFileContentNoDisposition then the file
+    ///     will instead be named after the packageID.
     /// </summary>
     internal class Example10
     {
-        private static void Main(string[] args)
-        {
-            //on premise web api
-            var service = new OnPremiseServices("http://localhost:80/hdswebapi/api/HDCS");
+        private static void Main()
+        {            
+            //Create Http Client, to send the request and receive the response
+            var client = new HttpClient();
 
-            var template = GetTemplate();
-            var assembleDocumentSettings = new AssembleDocumentSettings();
-            using (
-                var answers =
-                    new StringReader(
-                        @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""MyVar""><TextValue>World</TextValue></Answer></AnswerSet >")
-                )
-            {
-                var assembledDocumentResult = service.AssembleDocument(template, answers,
-                    assembleDocumentSettings, "YourDesiredLogRef");
+            //Create Http Request
+            var request = CreateHttpRequestMessage();
 
-                using (var fileStream = File.Create("output" + assembledDocumentResult.Document.FileExtension))
-                {
-                    assembledDocumentResult.Document.Content.CopyTo(fileStream);
-                }
-            }
+            //Send request and receive result
+            var result = client.SendAsync(request).Result;
+            
+            Console.WriteLine("Finished Uploading. Status Code: " + result.StatusCode);
+            Console.ReadLine();
         }
 
-        private static Template GetTemplate()
+        //Create new Http Request
+        private static HttpRequestMessage CreateHttpRequestMessage()
         {
-            const string packagePath = @"C:\Temp\HelloWorld.hdpkg";
-            //First argument is unique ID for the package
-            //Second argument is path to package. We're using a relative one here.
-            var templateLocation = new PackagePathTemplateLocation("7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2",
-                packagePath);
-            var template = new Template(templateLocation);
-            return template;
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://localhost:80/HDSWEBAPI/api/HDCS/0/7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2"),
+                Method = HttpMethod.Put,
+                Content = CreateFileContent(),
+            };
+
+            request.Content.Headers.TryAddWithoutValidation("Content-Type", "application/binary");
+            return request;
+        }
+
+        //Upload a template with a filename
+        private static StreamContent CreateFileContent()
+        {
+            const string filePath = @"C:\temp\HelloWorld.hdpkg";
+            var stream = File.OpenRead(filePath);
+
+            var fileContent = new StreamContent(stream);
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "\"files\"",
+                FileName = "\"" + Path.GetFileName(filePath) + "\""
+            };
+
+            return fileContent;
+        }
+
+        //Upload a template without a filename
+        private static StreamContent CreateFileContentNoDisposition(Stream stream)
+        {
+            var fileContent = new StreamContent(stream);
+            return fileContent;
         }
     }
 }

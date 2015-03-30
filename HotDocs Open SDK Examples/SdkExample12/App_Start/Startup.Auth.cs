@@ -4,9 +4,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using SdkExample11.Models;
+using SdkExample12.Models;
 
-namespace SdkExample10
+namespace SdkExample12
 {
     public partial class Startup
     {

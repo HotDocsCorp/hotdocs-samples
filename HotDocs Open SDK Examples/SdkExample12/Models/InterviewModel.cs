@@ -1,4 +1,4 @@
-﻿namespace SdkExample11.Models
+﻿namespace SdkExample12.Models
 {
     public class InterviewModel
     {

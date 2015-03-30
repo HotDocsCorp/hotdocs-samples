@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace SdkExample10
+namespace SdkExample12
 {
     public class BundleConfig
     {

@@ -1,8 +1,9 @@
 ﻿using System;
 using HotDocs.Sdk;
+using HotDocs.Sdk.Server.Contracts;
 using HotDocs.Sdk.Server.OnPremise;
 
-namespace SdkExample12
+namespace SdkExample13
 {
     /// <summary>
     /// This shows how to read variables and dialogs out of a component file
@@ -13,41 +14,43 @@ namespace SdkExample12
     ///And also the address of the webapi as the HostAddress ("http://localhost:52948/HDSWebAPI/api/HDCS").
     ///2. The variables and dialogs should be returned in the console variables first then dialogs.
     /// </summary>
-    internal class Example12
+    internal class Example13
     {
         private static void Main()
         {
-            const string packageId = "7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2";
-            const string hostAddress = "http://localhost:80/HDSWebAPI/api/HDCS";
+            var componentInfo = GetComponentInfo();
 
-            var template = GetTemplate(packageId, hostAddress);
-            var service = new OnPremiseServices(hostAddress);
-            var componentInfo = service.GetComponentInfo(template, true, "logref");
-
+            //Component Information
+            Console.WriteLine("Components:");
             foreach (var variable in componentInfo.Variables)
             {
-                Console.WriteLine(variable.Name);
-                Console.WriteLine(variable.Type);
-                Console.WriteLine();
+                Console.WriteLine("Name: " + variable.Name + ", Type: " + variable.Type);                
             }
 
-            Console.WriteLine("DIALOGS:");
-
+            //Dialog Information
+            Console.WriteLine("Dialogs:");
             foreach (var dialog in componentInfo.Dialogs)
             {
-                Console.WriteLine(dialog.Name);
+                Console.WriteLine("Name: " + dialog.Name);
             }
+
             Console.ReadLine();
         }
 
-        private static Template GetTemplate(string packageId, string hostAddress)
+        private static ComponentInfo GetComponentInfo()
         {
-            //First argument is unique ID for package
-            //Second argument is path to package. We're using a relative one here.
-            var templateLocation = new WebServiceTemplateLocation(packageId,
-                hostAddress);
+            var template = GetTemplate();
+            var service = new OnPremiseServices("http://localhost:80/HDSWebAPI/api/HDCS");
+
+            var componentInfo = service.GetComponentInfo(template, true, "logref");
+            return componentInfo;
+        }
+
+        private static Template GetTemplate()
+        {
+            var templateLocation = new WebServiceTemplateLocation("7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2", "http://localhost:80/HDSWebAPI/api/HDCS");
             var template = new Template(templateLocation);
             return template;
-        }
+        }   
     }
 }

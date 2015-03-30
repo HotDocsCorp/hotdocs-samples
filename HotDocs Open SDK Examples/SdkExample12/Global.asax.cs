@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using HotDocs.Sdk;
 
-namespace SdkExample10
+namespace SdkExample12
 {
     public class MvcApplication : HttpApplication
     {
@@ -13,8 +13,7 @@ namespace SdkExample10
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            TemplateLocation.RegisterLocation(typeof (PackagePathTemplateLocation));
+            BundleConfig.RegisterBundles(BundleTable.Bundles);            
             TemplateLocation.RegisterLocation(typeof(WebServiceTemplateLocation));
         }
     }

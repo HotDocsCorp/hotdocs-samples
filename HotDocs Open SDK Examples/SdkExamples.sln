@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample1", "SdkExample1\SdkExample1.csproj", "{4C7A0ED3-BBB4-4E21-A30B-177014BEFC57}"
 EndProject
@@ -19,13 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample7", "SdkExample7\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample8", "SdkExample8\SdkExample8.csproj", "{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample9", "SdkExample9\SdkExample9.csproj", "{82227E1E-A69E-46FD-AC9C-FFCD9B915D1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample9", "SdkExample9\SdkExample9.csproj", "{CAC921F1-056F-445F-8478-A51892618BA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample10", "SdkExample10\SdkExample10.csproj", "{F186CD1A-99E3-4584-9EB8-8D976DCFF5BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample10", "SdkExample10\SdkExample10.csproj", "{82227E1E-A69E-46FD-AC9C-FFCD9B915D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample11", "SdkExample11\SdkExample11.csproj", "{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample11", "SdkExample11\SdkExample11.csproj", "{F186CD1A-99E3-4584-9EB8-8D976DCFF5BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample12", "SdkExample12\SdkExample12.csproj", "{F18515EA-FB50-414E-9F08-85FBB66649A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample12", "SdkExample12\SdkExample12.csproj", "{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample13", "SdkExample13\SdkExample13.csproj", "{F18515EA-FB50-414E-9F08-85FBB66649A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93511A18-AECF-4CF6-8C8F-E5451B8CE65A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC921F1-056F-445F-8478-A51892618BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC921F1-056F-445F-8478-A51892618BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC921F1-056F-445F-8478-A51892618BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC921F1-056F-445F-8478-A51892618BA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82227E1E-A69E-46FD-AC9C-FFCD9B915D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82227E1E-A69E-46FD-AC9C-FFCD9B915D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82227E1E-A69E-46FD-AC9C-FFCD9B915D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
