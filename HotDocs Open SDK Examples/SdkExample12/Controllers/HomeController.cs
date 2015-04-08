@@ -82,8 +82,10 @@ namespace SdkExample12.Controllers
 
             var stream = new MemoryStream();            
             interviewFile.CopyTo(stream);
-
+            
             var fileContentResult = new FileContentResult(stream.ToArray(), Path.GetExtension(filename));
+            stream.Close();
+
             return fileContentResult;
         }
 
@@ -109,6 +111,7 @@ namespace SdkExample12.Controllers
         {
             var fileStream = System.IO.File.Create(@"C:\temp\output" + assembledDocumentResult.Document.FileExtension);
             assembledDocumentResult.Document.Content.CopyTo(fileStream);
+            fileStream.Close();
         }
     }
 }

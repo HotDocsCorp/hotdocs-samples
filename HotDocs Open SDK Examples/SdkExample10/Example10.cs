@@ -60,6 +60,7 @@ namespace SdkExample10
                 FileName = "\"" + Path.GetFileName(filePath) + "\""
             };
 
+            stream.Close();
             return fileContent;
         }
 
@@ -67,6 +68,7 @@ namespace SdkExample10
         private static StreamContent CreateFileContentNoDisposition(Stream stream)
         {
             var fileContent = new StreamContent(stream);
+            stream.Close();
             return fileContent;
         }
     }
