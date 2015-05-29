@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SdkExample10
 {
@@ -20,17 +22,32 @@ namespace SdkExample10
     {
         private static void Main()
         {            
-            //Create Http Client, to send the request and receive the response
-            var client = new HttpClient();
-
+            
             //Create Http Request
             var request = CreateHttpRequestMessage();
 
-            //Send request and receive result
-            var result = client.SendAsync(request).Result;
+            var result = GetResponse(request);
             
+        }       
+
+        private static async Task GetResponse(HttpRequestMessage request)
+        {
+            var result = await SendRequest(request);
             Console.WriteLine("Finished Uploading. Status Code: " + result.StatusCode);
             Console.ReadLine();
+
+        }
+
+        private static async Task<HttpResponseMessage> SendRequest(HttpRequestMessage request)
+        {
+            
+            //Create Http Client, to send the request and receive the response
+            var client = new HttpClient();
+
+            //Send request and receive result
+            var result = client.SendAsync(request).Result;
+
+            return result;
         }
 
         //Create new Http Request
@@ -38,7 +55,7 @@ namespace SdkExample10
         {
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri("http://localhost:80/HDSWEBAPI/api/HDCS/0/7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2"),
+                RequestUri = new Uri("http://localhost:80/HDSWEBAPI/api/HDCS/0/7A7BF8B9-C895-4BC9-BC1A-44E61D6008A5"),
                 Method = HttpMethod.Put,
                 Content = CreateFileContent(),
             };

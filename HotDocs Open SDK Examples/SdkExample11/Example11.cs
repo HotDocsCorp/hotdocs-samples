@@ -38,7 +38,7 @@ namespace SdkExample11
 
         private static Template GetTemplate()
         {
-            var templateLocation = new WebServiceTemplateLocation("7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2", "http://localhost:80/HDSWebAPI/api/HDCS");
+            var templateLocation = new WebServiceTemplateLocation("97477b06-02a6-4d6c-878f-44E61D6008A2", "http://localhost:80/HDSWebAPI/api/HDCS");
             var template = new Template(templateLocation);
             return template;
         } 
