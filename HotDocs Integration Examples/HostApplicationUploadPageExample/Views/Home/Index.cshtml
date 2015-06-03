@@ -1,0 +1,45 @@
+﻿@model HostApplicationUploadPageExample.Models.PackageUploadViewModel
+@{Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>    
+    <meta name="HD_FinishTemplate" content="" />
+    <link href='@Url.Content("~/Content/Site.css")' rel="stylesheet" />
+    <title>Upload</title>
+</head>
+<body>
+
+    <h2>Upload Templates</h2>
+
+    @using (Html.BeginForm("Index", "Home", new { totalTemplateCount = Model.TotalTemplatesCount }, FormMethod.Post, new { id = "UploadTemplateForm", name = "HD_Templates_Upload_Form", enctype = "multipart/form-data" }))
+    {
+        <label>Template Title: </label>
+        <br />
+
+        @Html.TextBoxFor(model => model.HD_Template.Title0, new { disabled = "disabled" })
+        <br />
+
+        <label>Template Description: </label>
+        <br />
+
+        @Html.TextAreaFor(model => model.HD_Template.Description0, 5, 30, new { disabled = "disabled" })
+        <br />
+
+        @Html.HiddenFor(model => model.HD_Template.LibraryPath0)
+        @Html.HiddenFor(model => model.HD_Template.Expiration_Date0)
+        @Html.HiddenFor(model => model.HD_Template.Warning_Days0)
+        @Html.HiddenFor(model => model.HD_Template.Extension_Days0)
+        @Html.HiddenFor(model => model.HD_Template.CommandLineSwitches0)
+        @Html.HiddenFor(model => model.HD_Template.UploadItemType0)
+        @Html.HiddenFor(model => model.HD_Template.Filename0)
+        @Html.HiddenFor(model => model.CurrentTemplateIndex)
+        @Html.HiddenFor(model => model.TotalTemplatesCount)
+
+        <input type="submit" value="Upload" />
+        <input id="hdnCurrentTemplateIndex" name="hdnCurrentTemplateIndex" style="display: none;" value="@Model.CurrentTemplateIndex" />
+        <input id="HD_Upload0" name="HD_Upload0" style="display: none;" type="file" value="" />
+        <input id="HD_Package_Manifest0" name="HD_Package_Manifest0" style="display: none;" type="file" value="" />
+    }
+
+</body>
+</html>

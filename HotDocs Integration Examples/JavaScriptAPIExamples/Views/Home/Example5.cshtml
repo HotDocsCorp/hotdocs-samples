@@ -1,0 +1,26 @@
+﻿@model JavaScriptAPIExamples.Models.InterviewModel
+
+@{
+    ViewBag.Title = "Example 5";
+    ViewBag.SubTitle = "Using Language Modules in the HotDocs Interview";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.SubTitle</h3>
+
+<script type="text/javascript">
+
+    /* Example 5 Javascript */
+
+    HDInterviewOptions = {
+        Locale: "de-DE",
+        LanguageModule: {
+            "de-DE": "/Scripts/LanguageModule.js"
+        }
+    };
+    
+</script>
+
+<div>
+    @Html.Raw(Model.InterviewFragment)
+</div>

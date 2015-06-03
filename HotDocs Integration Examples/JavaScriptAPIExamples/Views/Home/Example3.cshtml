@@ -1,0 +1,41 @@
+﻿@model JavaScriptAPIExamples.Models.InterviewModel
+
+@{
+    ViewBag.Title = "Example 3";
+    ViewBag.SubTitle = "HotDocs Interview Event Handling";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.SubTitle</h3>
+
+<script type="text/javascript">
+    
+    /* Example 3 Javascript: Event Handlers */
+
+    HDInterviewOptions = {
+        OnInit: function () {
+            HDAPI.RegisterHandler('OnHDStart', UpdateLogOnInterviewStart);
+            HDAPI.RegisterHandler('OnHDNavigated', UpdateLogOnInterviewNavigation);
+            HDAPI.RegisterHandler('OnHDProgress', UpdateLogOnInterviewProgress);
+        }
+    }
+    
+    function UpdateLogOnInterviewStart()
+    {        
+        console.log("Interview Started");
+    }
+
+    function UpdateLogOnInterviewNavigation()
+    {    
+        console.log("Interview Navigated");
+    }
+
+    function UpdateLogOnInterviewProgress()
+    {
+        console.log("Interview Progress Updated");
+    }
+</script>
+
+<div>      
+    @Html.Raw(Model.InterviewFragment)    
+</div>
