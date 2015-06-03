@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
@@ -14,29 +13,26 @@ namespace SdkExample14
     {
         static void Main(string[] args)
         {
-
-            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-
+            // Cloud Services Subscription Details
             var subscriberId = "example-subscriber-id";
             var signingKey = "example-signing-key";
+
+            // HMAC calculation data
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
+
 
             // Generate HMAC using Cloud Services signing key
             var hmac = GetHMAC(signingKey, timestamp, subscriberId, packageId);
 
             // Create upload request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp);
-            
-            
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp);                        
 
             //Send upload request to Cloud Service
             var client = new HttpClient();            
             var response = client.SendAsync(request);            
 
             Console.WriteLine("Upload:" + response.Result.StatusCode);
-            Console.WriteLine("Upload:" + response.Result.ReasonPhrase);
-            Console.WriteLine("Upload:" + response.Result.RequestMessage);
             Console.ReadKey();                             
         }
 
@@ -60,8 +56,7 @@ namespace SdkExample14
             // Add request headers
             request.Content.Headers.TryAddWithoutValidation("x-hd-date", timestamp.ToString("r"));
             request.Content.Headers.TryAddWithoutValidation("Content-Type", "application/binary");
-            request.Content.Headers.TryAddWithoutValidation("Authorization", hmac);
-            request.Content.Headers.Add("Keep-Alive", "false");
+            request.Content.Headers.TryAddWithoutValidation("Authorization", hmac);           
 
             return request;
         }

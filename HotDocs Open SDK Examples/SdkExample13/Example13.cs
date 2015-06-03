@@ -9,7 +9,7 @@ namespace SdkExample13
     /// This shows how to read variables and dialogs out of a component file
     /// using the on premise web API
     /// 
-    ///This will test getting the component info from a package. It assumes relevant package exists in on premise API package folder (TempFiles).
+    ///This tests retrieving the component info from a package. It assumes relevant package exists in on premise API package folder (TempFiles).
     ///1. On line 20 and 21 set your unique packageID (Should be the GUID of your package on the server) 
     ///And also the address of the webapi as the HostAddress ("http://localhost:52948/HDSWebAPI/api/HDCS").
     ///2. The variables and dialogs should be returned in the console variables first then dialogs.

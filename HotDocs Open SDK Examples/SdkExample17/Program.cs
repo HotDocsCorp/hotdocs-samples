@@ -11,16 +11,22 @@ namespace SdkExample17
     class Program
     {
         static void Main(string[] args)
-        {                               
+        {            
+            // Cloud Services Subscription Details
             var subscriberId = "example-subscriber-id";
             var signingKey = "example-signing-key";
                         
+            // HMAC calculation data
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
             var format = "Native";
+            var templateName = "";
+            var sendPackage = false;
+            var billingRef = "";
+            object[] settings = null;
 
             // Generate HMAC using Cloud Services signing key            
-            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, "", false, "", format, "");
+            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, settings);
 
             // Create assemble request            
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format);
@@ -31,15 +37,15 @@ namespace SdkExample17
             Console.WriteLine("Assemble:" + response.Result.StatusCode);
             
             // Save Assembled Documents
-            var task = Task.Run(async () => { await SaveAssembledDocuments(response.Result); });
-            task.Wait();   
+            var saveDocumentsTask = Task.Run(async () => { await SaveAssembledDocuments(response.Result); });
+            saveDocumentsTask.Wait();   
             
             Console.ReadKey();  
         }
 
         private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format)
         {
-            var assembleUrl = string.Format("https://cloud.hotdocs.ws/RestfulSvc.svc/assemble/{0}/{1}{2}?format={3}&billingref={4}", subscriberId, packageId, "", format, "");
+            var assembleUrl = string.Format("https://cloud.hotdocs.ws/RestfulSvc.svc/assemble/{0}/{1}?format={2}", subscriberId, packageId, format);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(assembleUrl),
@@ -77,7 +83,7 @@ namespace SdkExample17
         public static string CalculateHMAC(string signingKey, params object[] paramList)
         {
             byte[] key = Encoding.UTF8.GetBytes(signingKey);
-            string stringToSign = Canonicalize(paramList);
+            string stringToSign = CanonicalizeParameters(paramList);
             byte[] bytesToSign = Encoding.UTF8.GetBytes(stringToSign);
             byte[] signature;
 
@@ -89,7 +95,7 @@ namespace SdkExample17
             return Convert.ToBase64String(signature);
         }
 
-        public static string Canonicalize(params object[] paramList)
+        public static string CanonicalizeParameters(params object[] paramList)
         {
             if (paramList == null)
             {
