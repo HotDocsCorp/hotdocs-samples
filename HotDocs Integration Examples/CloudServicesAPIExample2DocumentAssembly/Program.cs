@@ -11,10 +11,10 @@ namespace CloudServicesAPIExample2DocumentAssembly
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             // Cloud Services Subscription Details
-            var subscriberId = "example-subscriber-id";
-            var signingKey = "example-signing-key";
+            string subscriberId = "example-subscriber-id";
+            string signingKey = "example-signing-key";
                         
             // HMAC calculation data
             var timestamp = DateTime.UtcNow;
@@ -23,15 +23,18 @@ namespace CloudServicesAPIExample2DocumentAssembly
             var templateName = "";
             var sendPackage = false;
             var billingRef = "";
-            object[] settings = null;
+            Dictionary<string, string> settings = new Dictionary<string, string>
+            {
+                {"UnansweredFormat", "[Variable]"}
+            };            
 
             // Generate HMAC using Cloud Services signing key            
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, settings);
 
             // Create assemble request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format, settings);
 
-            //Send assemble request to Cloud Services
+            // Send assemble request to Cloud Services
             var client = new HttpClient();            
             var response = client.SendAsync(request);
             Console.WriteLine("Assemble:" + response.Result.StatusCode);
@@ -43,9 +46,9 @@ namespace CloudServicesAPIExample2DocumentAssembly
             Console.ReadKey();  
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format, Dictionary<string, string> settings)
         {
-            var assembleUrl = string.Format("https://cloud.hotdocs.ws/RestfulSvc.svc/assemble/{0}/{1}?format={2}", subscriberId, packageId, format);
+            var assembleUrl = CreateAssembleUrl(subscriberId, packageId, format, settings);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(assembleUrl),
@@ -54,7 +57,7 @@ namespace CloudServicesAPIExample2DocumentAssembly
             };
 
             // Add request headers
-            request.Headers.TryAddWithoutValidation("x-hd-date", timestamp.ToString("r"));
+            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             request.Headers.TryAddWithoutValidation("Content-Type", "text/xml");
             request.Headers.TryAddWithoutValidation("Authorization", hmac);
             request.Headers.Add("Keep-Alive", "false");           
@@ -62,8 +65,20 @@ namespace CloudServicesAPIExample2DocumentAssembly
             return request;
         }
 
-        static async Task SaveAssembledDocuments(HttpResponseMessage response)
+        private static string CreateAssembleUrl(string subscriberId, string packageId, string format, Dictionary<string, string> settings)
         {
+            var assembleUrl = string.Format("https://cloud.hotdocs.ws/hdcs/assemble/{0}/{1}?format={2}", subscriberId, packageId, format);
+
+            var assembleUrlWithSettings = new StringBuilder(assembleUrl);
+            foreach (var kv in settings)
+            {
+                assembleUrlWithSettings.AppendFormat("&{0}={1}", kv.Key, kv.Value ?? "");
+            }
+            return assembleUrlWithSettings.ToString();
+        }
+
+        static async Task SaveAssembledDocuments(HttpResponseMessage response)
+        {            
             MultipartStreamProvider multipartStream = await response.Content.ReadAsMultipartAsync();
             foreach (var attachment in multipartStream.Contents)
             {                                   

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using SdkExample12;
+using WebServiceExample3InterviewDisplay;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace SdkExample12
+namespace WebServiceExample3InterviewDisplay
 {
     public partial class Startup
     {

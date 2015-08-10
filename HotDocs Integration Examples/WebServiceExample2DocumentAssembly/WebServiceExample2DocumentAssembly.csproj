@@ -11,6 +11,8 @@
     <AssemblyName>WebServiceExample2DocumentAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,34 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HotDocs.Sdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Cloud, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Server.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Server, Version=11.1.0.0, Culture=neutral, PublicKeyToken=5c9e421a71201d26, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Server.Interop, Version=11.1.0.0, Culture=neutral, PublicKeyToken=ca70e7f08f398355, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.3-beta\lib\HotDocs.Server.Interop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,8 +56,19 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\HotDocs.Sdk.Server.Contracts.AssemblyResult.datasource" />
+    <None Include="Properties\DataSources\HotDocs.Sdk.Server.Contracts.BinaryObject.datasource" />
+    <None Include="Properties\DataSources\HotDocs.Sdk.Server.Contracts.ComponentInfo.datasource" />
+    <None Include="Properties\DataSources\HotDocs.Sdk.Server.Contracts.TemplateInfo.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

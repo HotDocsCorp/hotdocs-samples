@@ -7,9 +7,6 @@ namespace HostApplicationUploadPageExample.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index(int? totalTemplateCount)
         {            
             int TemplatesLeftToUpload = Convert.ToInt32(Request.QueryString["HD_NumberTemplates"]);

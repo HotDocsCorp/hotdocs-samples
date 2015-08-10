@@ -1,4 +1,4 @@
-﻿namespace SdkExample12.Models
+﻿namespace WebServiceExample3InterviewDisplay.Models
 {
     public class InterviewModel
     {

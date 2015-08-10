@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample2AnswerCollection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample1Upload", "CloudServicesAPIExample1Upload\CloudServicesAPIExample1Upload.csproj", "{9A701715-84A7-4D67-8D37-E887D4E27A13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample4DocumentAssembly", "CloudServicesAPIExample4DocumentAssembly\CloudServicesAPIExample4DocumentAssembly.csproj", "{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample3InterviewFragment", "SdkExample3InterviewFragment\SdkExample3InterviewFragment.csproj", "{700435AB-3BA4-4E35-96FA-511A93918627}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample4InterviewDisplay", "SdkExample4InterviewDisplay\SdkExample4InterviewDisplay.csproj", "{ED082531-0C8F-4CE0-8424-2821AAB6897D}"
@@ -28,6 +26,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceExample2DocumentAssembly", "WebServiceExample2DocumentAssembly\WebServiceExample2DocumentAssembly.csproj", "{F186CD1A-99E3-4584-9EB8-8D976DCFF5BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaScriptAPIExamples", "JavaScriptAPIExamples\JavaScriptAPIExamples.csproj", "{BF4813DC-FC2B-4447-BA59-F43B71621AA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample2DocumentAssembly", "CloudServicesAPIExample2DocumentAssembly\CloudServicesAPIExample2DocumentAssembly.csproj", "{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceExample3InterviewDisplay", "WebServiceExample3InterviewDisplay\WebServiceExample3InterviewDisplay.csproj", "{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceExample4ComponentInfo", "WebServiceExample4ComponentInfo\WebServiceExample4ComponentInfo.csproj", "{F18515EA-FB50-414E-9F08-85FBB66649A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample4ComponentInfo", "CloudServicesAPIExample4ComponentInfo\CloudServicesAPIExample4ComponentInfo.csproj", "{7C62B2DA-BD17-4233-885F-93F88E2990F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample8WebServiceUpload", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample8WebServiceUpload\SdkExample8WebServiceUpload.csproj", "{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample9WebServiceDocumentAssembly", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample9WebServiceDocumentAssembly\SdkExample9WebServiceDocumentAssembly.csproj", "{8831A470-271F-496D-B6E6-3257F1E85D37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample10WebServiceInterviewDisplay", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample10WebServiceInterviewDisplay\SdkExample10WebServiceInterviewDisplay.csproj", "{68FF7AD5-91BF-429A-8407-A0094569A998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample11WebServiceComponentInfo", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample11WebServiceComponentInfo\SdkExample11WebServiceComponentInfo.csproj", "{1F4064F5-1C78-433D-A336-F893FBCCC5B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +61,6 @@ Global
 		{9A701715-84A7-4D67-8D37-E887D4E27A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A701715-84A7-4D67-8D37-E887D4E27A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A701715-84A7-4D67-8D37-E887D4E27A13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Release|Any CPU.Build.0 = Release|Any CPU
 		{700435AB-3BA4-4E35-96FA-511A93918627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{700435AB-3BA4-4E35-96FA-511A93918627}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700435AB-3BA4-4E35-96FA-511A93918627}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,6 +97,38 @@ Global
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF4813DC-FC2B-4447-BA59-F43B71621AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{165BEB24-C4E4-4D2C-AFEA-61FCC1320241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AC43D36-4EE1-4C72-AC82-E3C6DB8655D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18515EA-FB50-414E-9F08-85FBB66649A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18515EA-FB50-414E-9F08-85FBB66649A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18515EA-FB50-414E-9F08-85FBB66649A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18515EA-FB50-414E-9F08-85FBB66649A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8831A470-271F-496D-B6E6-3257F1E85D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8831A470-271F-496D-B6E6-3257F1E85D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8831A470-271F-496D-B6E6-3257F1E85D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8831A470-271F-496D-B6E6-3257F1E85D37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68FF7AD5-91BF-429A-8407-A0094569A998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68FF7AD5-91BF-429A-8407-A0094569A998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68FF7AD5-91BF-429A-8407-A0094569A998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68FF7AD5-91BF-429A-8407-A0094569A998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

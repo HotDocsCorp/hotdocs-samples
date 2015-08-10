@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudServicesAPIExample1
+namespace CloudServicesAPIExample1Upload
 {
     // Upload a HotDocs Package File to Cloud Services using an HMAC for authentication
     class Program
@@ -14,16 +14,18 @@ namespace CloudServicesAPIExample1
         static void Main(string[] args)
         {
             // Cloud Services Subscription Details
-            var subscriberId = "example-subscriber-id";
-            var signingKey = "example-signing-key";
+            string subscriberId = "example-subscriber-id";
+            string signingKey = "example-signing-key";
 
             // HMAC calculation data
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
-
+            string templateName = null;
+            var sendPackage = true;
+            var billingRef = "";
 
             // Generate HMAC using Cloud Services signing key
-            var hmac = GetHMAC(signingKey, timestamp, subscriberId, packageId);
+            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef);
 
             // Create upload request            
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp);                        
@@ -34,18 +36,11 @@ namespace CloudServicesAPIExample1
 
             Console.WriteLine("Upload:" + response.Result.StatusCode);
             Console.ReadKey();                             
-        }
-
-        private static string GetHMAC(string signingKey, DateTime timestamp, string subscriberId, string packageId)
-        {
-            // Calculate the HMAC
-            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, null, true, "");
-            return hmac;
-        }
+        }        
         
         private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp)
         {
-            var uploadUrl = string.Format("https://cloud.hotdocs.ws/RestfulSvc.svc/{0}/{1}?signature={2}", subscriberId, packageId, hmac);
+            var uploadUrl = string.Format("https://cloud.hotdocs.ws/hdcs/{0}/{1}?signature={2}", subscriberId, packageId, hmac);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(uploadUrl),
@@ -54,8 +49,8 @@ namespace CloudServicesAPIExample1
             };
             
             // Add request headers
-            request.Content.Headers.TryAddWithoutValidation("x-hd-date", timestamp.ToString("r"));
-            request.Content.Headers.TryAddWithoutValidation("Content-Type", "application/binary");
+            request.Content.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            request.Content.Headers.Add("Content-Type", "application/binary");
             request.Content.Headers.TryAddWithoutValidation("Authorization", hmac);           
 
             return request;

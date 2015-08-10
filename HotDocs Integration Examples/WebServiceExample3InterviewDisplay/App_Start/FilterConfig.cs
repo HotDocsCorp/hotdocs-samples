@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace SdkExample12
+namespace WebServiceExample3InterviewDisplay
 {
     public class FilterConfig
     {

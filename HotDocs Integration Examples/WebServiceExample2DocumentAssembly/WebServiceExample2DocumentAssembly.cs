@@ -1,51 +1,89 @@
-﻿using System.IO;
-using HotDocs.Sdk;
-using HotDocs.Sdk.Server;
-using HotDocs.Sdk.Server.OnPremise;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WebServiceExample2DocumentAssembly
 {
-    /// <summary>
-    /// This demonstrates assembling a document from a template using the On Premise Web API. 
-    /// Assumes we already have answer XML
-    /// it assumes the package has already been uploaded there
-    /// 
-    ///This will test assembling a document. The assembled document (output.docx) will be found in the bin/Debug folder and should contain the text ‘Hello World’.
-    ///To test the on premise web API replace the hardcoded host address passed into the OnPremiseServices class at line 23 with your relevant address.
-    ///In order for this to be successful the package must exist in the TempFiles folder in the on premise web API solution. 
-    ///It will be a package named ‘HelloWorld.hdpkg’ within a folder named by the package id ‘7A7BF8B9-C895-4BC9-BC1A-44E61D6008A2’ unless
-    ///you alter these hardcoded values in the GetTemplate() method.
-    /// </summary>
     internal class WebServiceExample2DocumentAssembly
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-            var assembledDocumentResult = AssembleDocument();
-            var fileStream = File.Create(@"C:\temp\output" + assembledDocumentResult.Document.FileExtension);                
-            assembledDocumentResult.Document.Content.CopyTo(fileStream);                            
+            // Web Services Subscriber Details
+            var subscriberId = "0";            
+                        
+            // Assembly Request Parameters
+            var packageId = "ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29";
+            var format = "Native";
+            Dictionary<string, string> settings = new Dictionary<string, string>
+            {
+                {"UnansweredFormat", "[Variable]"}
+            };            
+
+            // Create assemble request            
+            var request = CreateHttpRequestMessage(subscriberId, packageId, format, settings);
+
+            // Send assemble request to Cloud Services
+            var client = new HttpClient();            
+            var response = client.SendAsync(request);
+            Console.WriteLine("Assemble:" + response.Result.StatusCode);
+            
+            // Save Assembled Documents
+            var saveDocumentsTask = Task.Run(async () => { await SaveAssembledDocuments(response.Result); });
+            saveDocumentsTask.Wait();   
+            
+            Console.ReadKey();  
         }
 
-        private static AssembleDocumentResult AssembleDocument()
-        {                                           
-            var template = GetTemplate();            
-            var answers = GetAnswers();
-            var assembleDocumentSettings = new AssembleDocumentSettings();
+        private static HttpRequestMessage CreateHttpRequestMessage(string subscriberId, string packageId, string format, Dictionary<string, string> settings)
+        {
+            var assembleUrl = CreateAssembleUrl(subscriberId, packageId, format, settings);
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(assembleUrl),
+                Method = HttpMethod.Post,
+                Content = GetAnswers()
+            };
 
-            var service = new OnPremiseServices("http://localhost:80/hdswebapi/api/HDCS");
-            return service.AssembleDocument(template, answers, assembleDocumentSettings, "ExampleLogRef");
+            // Add request headers           
+            request.Headers.TryAddWithoutValidation("Content-Type", "text/xml");            
+            request.Headers.Add("Keep-Alive", "false");           
+
+            return request;
         }
 
-        private static Template GetTemplate()
+        private static string CreateAssembleUrl(string subscriberId, string packageId, string format, Dictionary<string, string> settings)
         {
-            var templateLocation = new WebServiceTemplateLocation("ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29", "http://localhost:80/HDSWebAPI/api/HDCS");
-            var template = new Template(templateLocation);
-            return template;
-        } 
+            var assembleUrl = string.Format("http://localhost:80/HDSWEBAPI/api/hdcs/assemble/{0}/{1}?format={2}", subscriberId, packageId, format);
 
-        private static StringReader GetAnswers()
-        {
-            return new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""TextExample-t""><TextValue>World</TextValue></Answer></AnswerSet >");
+            var assembleUrlWithSettings = new StringBuilder(assembleUrl);
+            foreach (var kv in settings)
+            {
+                assembleUrlWithSettings.AppendFormat("&{0}={1}", kv.Key, kv.Value ?? "");
+            }
+            return assembleUrlWithSettings.ToString();
         }
 
+        static async Task SaveAssembledDocuments(HttpResponseMessage response)
+        {            
+            MultipartStreamProvider multipartStream = await response.Content.ReadAsMultipartAsync();
+            foreach (var attachment in multipartStream.Contents)
+            {                                   
+                Stream writeAttachmentStream = await attachment.ReadAsStreamAsync();
+                using (FileStream output = new FileStream(@"C:\temp\" + attachment.Headers.ContentDisposition.FileName, FileMode.Create))
+                {
+                    writeAttachmentStream.CopyTo(output);
+                }
+            }
+        }
+
+        private static StringContent GetAnswers()
+        {
+            return new StringContent(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""TextExample-t""><TextValue>Hello World</TextValue></Answer></AnswerSet >");
+        }        
     }
 }
+

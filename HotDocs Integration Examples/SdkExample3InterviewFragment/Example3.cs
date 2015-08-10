@@ -2,7 +2,6 @@
 using System.IO;
 using HotDocs.Sdk;
 using HotDocs.Sdk.Server.Local;
-using Util = HotDocs.Sdk.Util;
 
 namespace SdkExample3InterviewFragment
 {

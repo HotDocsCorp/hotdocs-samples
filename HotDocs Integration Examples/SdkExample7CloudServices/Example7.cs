@@ -40,8 +40,8 @@ namespace SdkExample7CloudServices
 
         private static Services CreateHotDocsService()
         {
-            // You must change the 'ExampleSubscriberId' and 'ExampleSubscriberKey' values to your own HotDocs Cloud Services identification information.
-            var service = new Services("ExampleSubscriberId", "ExampleSubscriberKey");
+            // You must change the 'example-subscriber-id' and 'example-subscriber-key' values to your own HotDocs Cloud Services identification information.
+            var service = new Services("example-subscriber-id", "example-subscriber-key");
             return service;
         }
 

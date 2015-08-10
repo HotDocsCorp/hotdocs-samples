@@ -2,9 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using HotDocs.Sdk;
 
-namespace SdkExample12
+namespace WebServiceExample3InterviewDisplay
 {
     public class MvcApplication : HttpApplication
     {
@@ -13,8 +12,7 @@ namespace SdkExample12
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);            
-            TemplateLocation.RegisterLocation(typeof(WebServiceTemplateLocation));
+            BundleConfig.RegisterBundles(BundleTable.Bundles);                        
         }
     }
 }

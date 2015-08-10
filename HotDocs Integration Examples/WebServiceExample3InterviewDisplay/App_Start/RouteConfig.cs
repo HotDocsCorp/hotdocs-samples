@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace SdkExample12
+namespace WebServiceExample3InterviewDisplay
 {
     public class RouteConfig
     {
