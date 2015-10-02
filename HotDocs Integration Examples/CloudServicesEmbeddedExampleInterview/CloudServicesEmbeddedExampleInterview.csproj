@@ -56,28 +56,30 @@
     <Reference Include="HotDocs.Cloud.Client">
       <HintPath>HotDocs DLLs\HotDocs.Cloud.Client.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Sdk">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Sdk.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HotDocs.Sdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Cloud">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HotDocs.Sdk.Cloud, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Server">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HotDocs.Sdk.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Sdk.Server.Contracts">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HotDocs.Sdk.Server.Contracts, Version=2.0.50727, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Server">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Server.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HotDocs.Server, Version=11.0.2.0, Culture=neutral, PublicKeyToken=5c9e421a71201d26, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Server.dll</HintPath>
     </Reference>
-    <Reference Include="HotDocs.Server.Interop">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.4-beta\lib\HotDocs.Server.Interop.dll</HintPath>
+    <Reference Include="HotDocs.Server.Interop, Version=11.0.2.0, Culture=neutral, PublicKeyToken=ca70e7f08f398355, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Server.Interop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">

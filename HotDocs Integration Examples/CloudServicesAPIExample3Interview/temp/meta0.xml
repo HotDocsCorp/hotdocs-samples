@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ArrayOfBinaryObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BinaryObject>
+    <DataEncoding>utf-8</DataEncoding>
+    <Format>None</Format>
+  </BinaryObject>
+  <BinaryObject>
+    <FileName>HelloWorld3.docx.js</FileName>
+    <Format>None</Format>
+  </BinaryObject>
+</ArrayOfBinaryObject>

@@ -1,0 +1,46 @@
+<script type="text/javascript" src="https://cloud.hotdocs.ws/HDServerFiles/6.5/js/hdloader.js" id="HDSLoader"></script><script type="text/javascript">
+if (typeof HOTDOC$ != 'object' || typeof HOTDOC$.Engine != 'object') { document.getElementById('HDSLoader').parentNode.appendChild(document.createTextNode('There was an error finding or loading https://cloud.hotdocs.ws/HDServerFiles/6.5/js/hdloader.js. Please contact your site administrator if this problem continues.')); }
+HOTDOC$ = window.HOTDOC$ || {};
+HOTDOC$.InitAnswers = [
+{ n: "TextExample-t", t: "TX", v: "Hello World"},
+{ n: "NumberExample-n", t: "NU"},
+{ n: "DateExample-d", t: "DA"},
+{ n: "TrueFalseExample-tf", t: "TF"},
+{ n: "MultipleChoiceExample-mc", t: "MC"},
+{ n: "NameRepeatExample-t", t: "TX"},
+{ n: "Repeat1", t: "TF"}
+];
+HDAnswerState='UEsDBBQAAQAIAGFQMUfminu6lwAAAL4AAAARAAAASERPcmlnaW5hbFhtbC5hbnj6DnezJje12g0+BF+wxZyoBRUcFVZo6DwJ+r+nxXBZ5a2XCdqgpLVHlNwxRp3pwhshTY9yMXpwqp9CZ1lQK4WG7V3dmdqPrRpiGDsWXs4hWxOA9qkXLkBi+4IdbtEcWM2wZn+XCMqKt9y7ghd1tLg+4k0J5YPbbpQfvutNoQ10Wcf94CpwhQ1gZXsqMpd92zt6x57Q5OTIUEsBAi0AFAABAAgAYVAxR+aKe7qXAAAAvgAAABEAAAAAAAAAAACAAAAAAAAAAEhET3JpZ2luYWxYbWwuYW54UEsFBgAAAAABAAEAPwAAAMYAAAAAAA==';
+HDAssemblyEngineVersion="11.1.4.6323";
+HDTestInBrowser=false;
+HDTemplateName="HelloWorld3";
+FormAction="InterviewFinish";
+HDJavascriptPath="https://cloud.hotdocs.ws/HDServerFiles/6.5/js/";
+HDUserCSS="http://localhost/CloudServicesAPIExample3Interview/Stylesheets/";
+HDSystemCSS="http://localhost/CloudServicesAPIExample3Interview/Stylesheets/hdssystem.css";
+HDOutlineInOrder=true;
+HDDefUnans="";
+HDShowAllResourceBtns=false;
+HDSaveAnsURL="http://localhost/examplehostapplication/save/";
+HDTplImgPath="test";
+HDTemplateState="128|WfDifLsGSKEuw8zgr6vXclU/Em3c5Yymae8KfZzF5MfTCA5C1Sao0a41SVV9U214AjEEzmPfrBDzx4B0FkK4MwwxOK92vUCmiL3fBjTxv43ernO1GSMYFDpeBwoKe301K5Wdutu9ietVgpcvNT0yhf3K5uOi9phUVpHJ13BLBfk=";
+HDDefInterviewLocale="en-US";
+
+HDASCol=1;HDAS1IndentP=true;HDAS1BulletP=true;HDAS1IndentA=true;HDAS1BulletA=true;
+var hdPageLoaded=false,hdLoader=document.getElementById?document.getElementById("HDSLoader"):HDSLoader;
+if(document.addEventListener)document.addEventListener("DOMContentLoaded",HDPageOnLoad,false);
+else if(window.addEventListener)window.addEventListener("load",HDPageOnLoad,false);
+else if(window.attachEvent)window.attachEvent("onload",HDPageOnLoad);
+if(hdLoader.readyState){
+	hdLoader.onreadystatechange=function(){if(this.readyState=="complete")HDStartup();};
+	hdLoader.onreadystatechange();
+}else hdLoader.onload=HDStartup;
+function HDPageOnLoad(){hdPageLoaded=true;HDStartup();}
+function HDStartup(){
+	if (!hdPageLoaded||typeof HOTDOC$.HDBrowserInterview!="function")return;
+	if (typeof hdLoader.onreadystatechange=="function")hdLoader.onreadystatechange=null;
+	else if (typeof hdLoader.onload=="function")hdLoader.onload=null;
+HOTDOC$.HDJavaScriptInterview("http://localhost/CloudServicesAPIExample3Interview/Home/InterviewDefinition/?stateString=128|WfDifLsGSKEuw8zgr6vXclU/Em3c5Yymae8KfZzF5MfTCA5C1Sao0a41SVV9U214AjEEzmPfrBDzx4B0FkK4MwwxOK92vUCmiL3fBjTxv43ernO1GSMYFDpeBwoKe301K5Wdutu9ietVgpcvNT0yhf3K5uOi9phUVpHJ13BLBfk%3D&type=js&template=", "HelloWorld3.docx");
+}
+</script>
+<div id="hdMainDiv"></div>

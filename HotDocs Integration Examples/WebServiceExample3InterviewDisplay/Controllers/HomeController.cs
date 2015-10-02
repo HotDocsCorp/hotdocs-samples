@@ -34,7 +34,7 @@ namespace WebServiceExample3InterviewDisplay.Controllers
         {
             var interviewRequest = new InterviewRequest();
             var interviewFragment = interviewRequest.GetInterviewFragment();
-            ViewBag.Message = interviewFragment;
+            ViewBag.InterviewFragment = interviewFragment;
             return View();
         }        
     }

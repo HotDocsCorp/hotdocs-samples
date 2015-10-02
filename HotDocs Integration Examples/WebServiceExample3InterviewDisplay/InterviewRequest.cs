@@ -10,12 +10,16 @@ namespace WebServiceExample3InterviewDisplay
     {      
         public string GetInterviewFragment()
         {
-            var interviewResult = GetInterview();                                    
+            // Get Interview from Web Service
+            var interviewResult = GetInterview(); 
+                                   
+            // Get interview file stream from response
             var multipartStream = GetMultipartStream(interviewResult);
             multipartStream.Wait();
 
+            // Get Interview HTML Fragment from file stream
             var interviewFiles = GetInterviewFiles(multipartStream.Result);
-            return interviewResult.StatusCode.ToString();
+            return interviewFiles.Result;
         }
 
         static async Task<IEnumerable<HttpContent>> GetMultipartStream(HttpResponseMessage response)
@@ -29,44 +33,63 @@ namespace WebServiceExample3InterviewDisplay
         }
 
         static async Task<string> GetInterviewFiles(IEnumerable<HttpContent> multipartStream)
-        {
-            Dictionary<string, string> s = new Dictionary<string, string>();
+        {            
             foreach (var attachment in multipartStream)
             {
-                var writeAttachmentStream = await attachment.ReadAsStringAsync();
-                s.Add(attachment.Headers.ContentType.ToString(), writeAttachmentStream);
+                if(attachment.Headers.ContentType.ToString() == "text/plain") {
+                    var writeAttachmentStream = await attachment.ReadAsStringAsync();
+                    return writeAttachmentStream;
+                }
             }
-            return s["text/plain"];
+            return null;
         }
 
-        public HttpResponseMessage GetInterview()
+        private HttpResponseMessage GetInterview()
         {
-            // Cloud Services Subscription Details
+            // Web Services Subscription Details
             string subscriberId = "0";            
 
-            // HMAC calculation data
-            var timestamp = DateTime.UtcNow;
+            // Request data            
             var packageId = "ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29";
             var format = "Unspecified";
-            var tempImageUrl = "test";
+            var tempImageUrl = "http://localhost/HDServerFiles/temp";
             var settings = new Dictionary<string, string>
             {
-                {"HotDocsJsUrl", "https://localhost/HDServerFiles/js/"},
-                {"HotDocsCssUrl", "https://localhost/HDServerFiles/stylesheets/"},
-                {"FormActionUrl", "Disposition.aspx"},
+                {"HotDocsJsUrl", "http://localhost/HDServerFiles/js/"},
+                {"HotDocsCssUrl", "http://localhost/HDServerFiles/stylesheets/"},
+                {"FormActionUrl", "InterviewFinish"},
             };                     
 
-            // Create assemble request            
-            var request = CreateHttpRequestMessage(subscriberId, packageId, timestamp, format, tempImageUrl, settings);
+            // Create interview request  
+            var interviewUrl = CreateInterviewUrl(subscriberId, packageId, format, tempImageUrl, settings);
+            var request = CreateHttpRequestMessage(interviewUrl);
 
-            //Send assemble request to Cloud Services
+            //Send interview request to Web Services
             var client = new HttpClient();
             var response = client.SendAsync(request);
+
             return response.Result;
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string subscriberId, string packageId, DateTime timestamp, string format, string tempImageUrl, Dictionary<string, string> settings)
-        {            
+        private static HttpRequestMessage CreateHttpRequestMessage(string interviewUrl)
+        {                       
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(interviewUrl),
+                Method = HttpMethod.Post,
+                Content = GetAnswers()
+            };
+
+            // Add request headers
+            request.Content.Headers.Remove("Content-Type");
+            request.Content.Headers.Add("Content-Type", "text/xml");            
+            request.Headers.Add("Keep-Alive", "false");
+
+            return request;
+        }
+
+        private static string CreateInterviewUrl(string subscriberId, string packageId, string format, string tempImageUrl, Dictionary<string, string> settings)
+        {
             var partialInterviewUrl = string.Format("http://localhost:80/HDSWebAPI/api/hdcs/interview/{0}/{1}?format={2}&tempimageurl={3}", subscriberId, packageId, format, tempImageUrl);
             var completedInterviewUrlBuilder = new StringBuilder(partialInterviewUrl);
 
@@ -74,23 +97,9 @@ namespace WebServiceExample3InterviewDisplay
             {
                 completedInterviewUrlBuilder.AppendFormat("&{0}={1}", kv.Key, kv.Value ?? "");
             }
-            var InterviewUrl = completedInterviewUrlBuilder.ToString();
-
-            var request = new HttpRequestMessage
-            {
-                RequestUri = new Uri(InterviewUrl),
-                Method = HttpMethod.Post,
-                Content = GetAnswers()
-            };
-
-            // Add request headers
-            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
-            request.Content.Headers.Remove("Content-Type");
-            request.Content.Headers.Add("Content-Type", "text/xml");            
-            request.Headers.Add("Keep-Alive", "false");
-
-            return request;
+            return completedInterviewUrlBuilder.ToString();
         }
+
 
         private static StringContent GetAnswers()
         {

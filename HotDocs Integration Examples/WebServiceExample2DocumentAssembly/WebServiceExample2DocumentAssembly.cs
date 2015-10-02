@@ -26,7 +26,7 @@ namespace WebServiceExample2DocumentAssembly
             // Create assemble request            
             var request = CreateHttpRequestMessage(subscriberId, packageId, format, settings);
 
-            // Send assemble request to Cloud Services
+            // Send assemble request to Web Services
             var client = new HttpClient();            
             var response = client.SendAsync(request);
             Console.WriteLine("Assemble:" + response.Result.StatusCode);

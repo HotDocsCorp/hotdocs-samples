@@ -1,0 +1,16 @@
+﻿@model CloudServicesEmbeddedAPIExample.Models.InterviewModel
+
+<body onload="HD$.CreateInterviewFrame('interview', '@Model.SessionId'); ">
+<button onclick="snapshot()">Snapshot</button>
+@if (Model.Snapshot)
+{
+    @Html.ActionLink("Take Session Snapshot", "ResumeSession", "Home")
+    @*<a style="float:right; display:block" id="resume-link" href="">Resume Interview from Snapshot</a>*@
+}
+
+    <form id="form1" runat="server">
+        <h1>Employment Agreement Generator</h1>
+        <div id="interview" style="width:100%; height:600px; border:1px solid black">
+
+        </div>
+    </form>

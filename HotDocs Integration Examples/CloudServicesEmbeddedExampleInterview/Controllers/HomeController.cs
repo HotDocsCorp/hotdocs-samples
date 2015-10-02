@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotDocs.Sdk.Server.Contracts;
 using HotDocs.Cloud.Client;
 using CloudServicesEmbeddedExampleInterview.Models;
 
@@ -23,16 +24,16 @@ namespace CloudServicesEmbeddedExampleInterview.Controllers
         protected string GetSessionID()
         {
             // Subscriber Information
-            string subscriberId = "hdSolutions";
-            string signingKey = "N7qN2C6gx46BVZkn";
+            string subscriberId = "example-subscriber-id";
+            string signingKey = "example-signing-key";
 
             // Template Package File Information
             string templateName = "HelloWorld";
-            string templateFilePath = "~/HelloWorld.hdpkg";
+            string templateFilePath = @"C:\temp\HelloWorld.hdpkg";
 
-            // Create the Cloud Services session and return the Session ID
+             //Create the Cloud Services session and return the Session ID
             var client = new RestClient(subscriberId, signingKey);            
-            return client.CreateSession(templateName, Server.MapPath(templateFilePath));
+            return client.CreateSession(templateName, Server.MapPath(templateFilePath));            
         }
     }
 }

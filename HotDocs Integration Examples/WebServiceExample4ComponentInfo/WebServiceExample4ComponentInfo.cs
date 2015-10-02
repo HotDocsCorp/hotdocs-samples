@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace WebServiceExample4ComponentInfo
 {
@@ -51,10 +48,10 @@ namespace WebServiceExample4ComponentInfo
 
         private static HttpRequestMessage CreateHttpRequestMessage(string subscriberId, string packageId, bool includeDialogs)
         {
-            var assembleUrl = string.Format("http://localhost:80/HDSWEBAPI/api/hdcs/componentinfo/{0}/{1}?includeDialogs={2}", subscriberId, packageId, includeDialogs);
+            var componentInfoUrl = string.Format("http://localhost:80/HDSWEBAPI/api/hdcs/componentinfo/{0}/{1}?includeDialogs={2}", subscriberId, packageId, includeDialogs);
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri(assembleUrl),
+                RequestUri = new Uri(componentInfoUrl),
                 Method = HttpMethod.Get
             };
 

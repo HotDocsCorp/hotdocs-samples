@@ -1,0 +1,163 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Web;
+
+namespace CloudServicesEmbeddedAPIExample
+{
+    public class EmbeddedInterview
+    {
+        // Subscriber Information
+        static readonly string subscriberId = "example-subscriber-id";
+        static readonly string signingKey = "example-signing-key";
+
+        // HMAC calculation data
+        static readonly DateTime timestamp = DateTime.UtcNow;
+        static readonly string packageId = "HelloWorld";
+        static readonly string billingRef = "";
+        static readonly string interviewFormat = "JavaScript";
+        static readonly string outputFormat = "DOCX";
+        static readonly string settings = null;
+
+        public static string CreateCloudServicesSession()
+        {            
+            // Generate HMAC using Cloud Services signing key
+            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
+
+            // Create Session request            
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat);
+
+            //Send upload request to Cloud Service
+            var client = new HttpClient();
+            var response = client.SendAsync(request);
+            response.Wait();
+
+            // Get Session ID from Response Content Stream
+            var responseContentStream = response.Result.Content;
+            var sessionId = responseContentStream.ReadAsStringAsync().Result;
+
+            return sessionId;
+        }
+
+        public static string ResumeCloudServicesSession(string snapshot)
+        {
+            // Generate HMAC using Cloud Services signing key
+            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
+
+            // Create Session request            
+            var request = CreateResumeSessionHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat);
+
+            //Send upload request to Cloud Service
+            var client = new HttpClient();
+            var response = client.SendAsync(request);
+            response.Wait();
+
+            // Get Session ID from Response Content Stream
+            var responseContentStream = response.Result.Content;
+            var sessionId = responseContentStream.ReadAsStringAsync().Result;
+
+            return sessionId;
+        }
+
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat)
+        {
+            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/newsession/{0}/{1}?interviewFormat={2}&outputformat={3}", subscriberId, packageId, interviewFormat, outputFormat);
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(newSessionUrl),
+                Method = HttpMethod.Post
+            };
+
+            // Add request headers       
+            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));  
+            request.Headers.TryAddWithoutValidation("Authorization", hmac);   
+            request.Headers.Add("Keep-Alive", "false");
+
+            return request;
+        }
+
+        private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat)
+        {
+            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?interviewFormat={2}&outputformat={3}", subscriberId, packageId, interviewFormat, outputFormat);
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(newSessionUrl),
+                Method = HttpMethod.Post
+            };
+
+            // Add request headers       
+            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            request.Headers.TryAddWithoutValidation("Authorization", hmac);
+            request.Headers.Add("Keep-Alive", "false");
+
+            return request;
+        }
+
+        public static void SaveSnapshot(string snapshot)
+        {            
+            if (snapshot != null)
+            {
+                System.IO.File.WriteAllText(@"C:\temp\snapshot.txt", snapshot);                
+            }
+        }
+
+        public static string GetSnapshot()
+        {
+            if (System.IO.File.Exists(@"C:\temp\snapshot.txt"))
+            {
+                return System.IO.File.ReadAllText(@"C:\temp\snapshot.txt");
+            }
+            return "";
+        }
+
+        public static string CalculateHMAC(string signingKey, params object[] paramList)
+        {
+            byte[] key = Encoding.UTF8.GetBytes(signingKey);
+            string stringToSign = Canonicalize(paramList);
+            byte[] bytesToSign = Encoding.UTF8.GetBytes(stringToSign);
+            byte[] signature;
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA1(key))
+            {
+                signature = hmac.ComputeHash(bytesToSign);
+            }
+
+            return Convert.ToBase64String(signature);
+        }
+
+        public static string Canonicalize(params object[] paramList)
+        {
+            if (paramList == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var strings = paramList.Select(param =>
+            {
+                if (param is string || param is int || param is Enum || param is bool)
+                {
+                    return param.ToString();
+                }
+
+                if (param is DateTime)
+                {
+                    DateTime utcTime = ((DateTime)param).ToUniversalTime();
+                    return utcTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                }
+
+                if (param is Dictionary<string, string>)
+                {
+                    var sorted = ((Dictionary<string, string>)param).OrderBy(kv => kv.Key);
+                    var stringified = sorted.Select(kv => kv.Key + "=" + kv.Value).ToArray();
+                    return string.Join("\n", stringified);
+                }
+                return "";
+            });
+
+            return string.Join("\n", strings.ToArray());
+        }
+
+    }
+}

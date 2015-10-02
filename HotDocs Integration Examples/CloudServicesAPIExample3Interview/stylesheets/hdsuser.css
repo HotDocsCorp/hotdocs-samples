@@ -1,0 +1,180 @@
+/* 
+	Theme: HDSUser
+	Details: This is the default theme for HotDocs browser-based interviews.
+*/
+
+/** This class is added to all top-level interview nodes. This includes #hdMainDiv, which hosts the interview, 
+	as well as DIVs that display popup interviews or popup resources. Any styles that should be applied to the
+	interview on a global basis go here. **/
+DIV.hd-interview-base { font: 12px Verdana, Arial, sans-serif; color: #000000; }
+
+/** Wrappers: These are the top level DOM elements, beginning with hdMainDiv, which is the root interview container. **/
+#hdMainDiv { }
+#hdWrapper { }
+#hdHost { }
+#InterviewEngine { }
+#hdBodyDiv { }
+
+/** ServerResponse: "Modal" widget displayed on top of interview when user clicks document preview, save answers, answer summary, help, etc. **/
+#hdServerResponse, #hdModalResponse { background-color: #f4f4f4; }
+DIV.hd-response-title { font-size:125%; font-weight: bold; }
+DIV.hd-response-header { }
+DIV.hd-response-footer { }
+DIV.hd-response-btns { font-weight:normal; }
+BUTTON.hd-response-print { }
+BUTTON.hd-response-return { }
+
+/** Shader: Displayed on top of the interview during initial loading or answer submission at end of interview. **/
+#hdShader { background-color: #000000; opacity: 0.4; filter: alpha(opacity=40); }
+
+/** Loader Progress Bar: Displayed as each script and supporting file is loaded before the interview starts. **/
+#hdLoaderBar * { font-size: 110%; }
+DIV.hd-loader-progbar-mtr { border: 1px solid #003366; background: white; }
+DIV.hd-loader-progbar-pct { padding: 3px; }
+DIV.hd-loader-progbar-bar { padding: 3px; background: #aaaccc; background-image: linear-gradient(to right, #0089d0 20%, #aaaccc 80%); }
+SPAN.hd-loader-progbar-msg { color: #ffffff; }
+
+/** Error Box: Displays critical error messages during loading or runtime. **/
+#hdErrorDiv * { font-size: 110%; }
+DIV.hd-error-32 { }
+DIV.hd-error-msg { font-weight: bold; color: white; }
+
+/** HD3DObject: Class applied to navigation bar, server response footer, and interview splitters to give them a 3D look. **/
+.HD3DObject { background-color: #dadbeb; border-color: #eeeeee #808080 #808080 #eeeeee; border-style: solid; }
+
+/** Interview Toolbar: Displays template title and buttons for performing various tasks during the interview. */
+#hdHeading { }
+DIV.hd-titlebar { background-color: #022d68; padding:3px; }
+DIV.hd-titlebar-title { color: #ffffff; font-size: 130%; font-weight: bold; }
+DIV.hd-titlebar-icon { }
+DIV.hd-titlebar-buttons { }
+DIV.hdtb-icon { background-color: #ffffff; text-decoration: none; color: #022d68; font-weight: bold; border: 1px solid #000000; border-radius: 4px; }
+DIV.hdtb-hot { background-color: #c9d4f4; }
+DIV.hdtb-text {  }
+
+/** Navigation Bar: A set of buttons displayed below the interview to allow navigation from one dialog to the next. **/
+#hdNavBar { border-width: 1px; border-left-width: 0; margin-left: -1px; height:38px;}
+DIV.hd-nav-table { }
+DIV.hd-nav-left { }
+DIV.hd-nav-middle { }
+DIV.hd-nav-right { }
+
+/** Progress Bar: Displayed below the navigation bar to indicate how many questions have been answered in the interview. **/
+DIV.hd-progress { background-color: #ffffff; }
+DIV.hd-progress-normal { background-color: blue; }
+DIV.hd-progress-required { background-color: red; }
+DIV.hd-progress-complete { background-color: green; }
+
+/** Interview Outline: List of dialogs (in the form of a tree) shown on the left side of the interview. **/
+#hdOutlineDiv { background-color: #ffffff; }
+#hdOutlineContent { background-color: #ffffff; }
+#hdOutlineCurrent { background-color: #dfe3e9; }
+.hd-ol-caption-text { }
+.hd-ol-entry { line-height: 1.67em; }
+.hd-ol-entry:hover { background-color: #eaf5fc; }
+.hd-ol-entry-d { color: #4c4c68; }
+
+/** Resource Pane: Displayed below the dialog to provide additional information about the dialog or individual questions. **/
+.hd-popup { background-color:#ffffff; border:1px solid black; border-radius: 5px; padding:0; }
+#hdResourcePane, .hd-popup-resource { background-color: #ffffec; }
+.hd-popup .ui-dialog-title { font-weight: bold; }
+.hd-popup .ui-dialog-titlebar { background-image:none; background-color: #dddddd; font-weight:bold; cursor:default; }
+
+/** Answer Summary: A list of questions and answers from the interview that is shown by clicking the Answer Summary toolbar button.  **/
+TD.HDASDlgTitle { font-weight: bold; }
+TD.HDASVarPrompt { color: #333333; font-style: normal; }
+TD.HDASDlgElem { color: #333333; font-style: italic; }
+TD.HDASAnsValue { padding-bottom: 4px; }
+
+/** Interview Help: Displayed when the user clicks the Help button on the interview toolbar. **/
+DIV.hd-help { }
+TABLE.hd-help-table { background-color: #dfdfdf; border-collapse: collapse; }
+TABLE.hd-help-table td, .hd-help-table th { border: 1px solid #ffffff; padding: 5px; }
+TABLE.hd-help-table th { text-align: left; }
+UL.hd-help-ul { }
+TH.hd-help-col-one { width: 30%; }
+
+/** Shortcut Menu: Displayed when you click the button on the right side of the dialog title bar. **/
+DIV.hd-menu { border-radius: 5px; background-color: Menu; border: 1px solid gray; box-shadow: 2px 2px 4px gray; }
+DIV.hd-menu-base { font-size: 8pt; background-color: Menu; color: MenuText; padding: 0; margin-bottom: 0; margin-top: 0; cursor: default; }
+DIV.hd-menu-disabled { color: GrayText; }
+DIV.hd-menu-hilite { border-color: #96d9f9; background-color: rgba(203,230,242,0.5); border-radius: 3px; }
+DIV.hd-menu-iconbkgrd { border-right: 1px solid #a2a2b5; background: #f2f5fa; /* Old browsers */ background: -moz-linear-gradient(left, #f2f5fa 0, #e7ebf3 100%, #7db9e8 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, right top, color-stop(0,#f2f5fa), color-stop(100%,#e7ebf3), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(left, #f2f5fa 0,#e7ebf3 100%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(left, #f2f5fa 0,#e7ebf3 100%,#7db9e8 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(left, #f2f5fa 0,#e7ebf3 100%,#7db9e8 100%); /* IE10+ */ background: linear-gradient(to right, #f2f5fa 0,#e7ebf3 100%,#7db9e8 100%); /* W3C */ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5fa', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 */ }
+DIV.hd-menu-item { }
+DIV.hd-menu-icon { }
+DIV.hd-menu-caption { }
+HR.hd-menu-divider { }
+
+/** Dot Codes: Allow template authors to apply formatting to titles, prompts, and other interview text. **/
+.dot-b /* bold */ { }
+.dot-i /* italic */ { }
+.dot-u /* underline */ { }
+.dot-x /* strike through */ { }
+.dot-s /* small caps */ { }
+.dot-a /* uppercase */ { }
+.dot-h /* hidden */ { }
+.dot-l /* Capitalize first letter of each word */ { }
+.dot-w /*web link*/ { color: #0000ff; text-decoration: underline; }
+
+/** DatePicker: These styles apply to the popup calendar displayed for Date variables. **/
+DIV.hd-datepicker { }
+TABLE.hd-datepicker-grid { border: 1px outset; }
+TD.hd-datepicker-titlebar { background-color: #333333; padding: 2px; }
+TD.hd-datepicker-title { color: #ffffff; }
+TD.hd-datepicker-day { background-color: #ffffff; padding: 2px; border: 1px solid #666666; border-width: 0 1px 1px 0; }
+TD.hd-datepicker-label { background-color: #999999; color: #ffffff; padding: 0; padding-bottom: 2px; }
+TD.hd-datepicker-weekend { background-color: #efefef; }
+TD.hd-datepicker-selected { background-color: #bbbccc; color: #ffffff; font-weight: bold; }
+TD.hd-datepicker-today { background-color: #dfe3e9; }
+
+/** Dialog Elements: Used to display text, graphics, buttons, and hyperlinks in dialogs. **/
+.DlgElemLnk { }
+.DlgElemLnkText * { color: Blue !important; text-decoration: underline; }
+
+/** ValidationErrorControl: Displayed below date and number fields with invalid answers. **/
+DIV.hd-validation { }
+
+/** DataGrid: Used to display spreadsheet dialogs and answer sources in a grid. **/
+DIV.hd-grid { background-color: #ffffff; border-color: #617583; }
+TR.hd-grid-header { background: #ffffff; -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5e5e5')"; background: -moz-linear-gradient(top, #ffffff 0, #e5e5e5 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(100%,#e5e5e5)); background: -webkit-linear-gradient(top, #ffffff 0,#e5e5e5 100%); background: -o-linear-gradient(top, #ffffff 0,#e5e5e5 100%); background: -ms-linear-gradient(top, #ffffff 0,#e5e5e5 100%); background: linear-gradient(to bottom, #ffffff 0,#e5e5e5 100%); }
+TR.hd-grid-body { }
+.hd-grid-line { border-color: #c9caca; }
+DIV.hd-grid-row { background-color: #ffffff; }
+DIV.hd-grid-row:hover, DIV.hd-grid-row:hover .hd-grid-rh { background-color: #d5eaf1; }
+DIV.hd-grid-row-alt { background-color: #f8f9fb; }
+DIV.hd-grid-row-alt:hover, DIV.hd-grid-row-alt:hover .hd-grid-rh { background-color: #d8ebf2; }
+DIV.hd-grid-selected, DIV.hd-grid-selected:hover { background-color: #badde9; }
+DIV.hd-grid-selected .hd-grid-rh { background-color: #d5eaf1 !important; }
+
+/** Dialog Content & Layout Styles **/
+DIV.RunonDlgContent { padding-bottom: 14px; /* default spacer between dialogs in single-page interviews */ }
+.hd-dlg-title { background-color: #bbbccc; color: #333333; font-weight:bold; }
+DIV.DlgTitle { font-size: 125%; font-weight: bold; }
+.hd-dlg-content { background-color: #f3f3f6; }
+.hd-input-prompt { }
+.hd-input-currency { }
+.GrayText { color: gray; }
+input:disabled { background-color: #fafafa; border: 1px solid #d9dce0; padding: 2px 1px 2px 1px; }
+.HDRequired /* applies to prompts of variables that are REQUIREd by scripting in the template */ { color: #cc0033; }
+.HDMarked /* applies to Prompts (SPAN or LABEL) of variables that are marked unanswered BY THE SERVER */ { /* Note: if your templates contain any dialogs that have prompts to the left of fields, AND              where the fields are not aligned, then it is not recommended for any of the styles              applied here to change the size or spacing of the text. */ color: #cc0033; }
+SPAN.HDSSMarked /* applies to the spreadsheet column headings (SSCHTitle) of variables marked unanswered BY THE SERVER */ { color: #aa0000; }
+TD.HDSSMarked /* applies to the spreadsheet column header cell (SSFixed) of variables marked unanswered BY THE SERVER */ { background-color: #ffd0d0; }
+SPAN.errorText { color: #cc0033; }
+DIV.GrpBoxTitle { }
+SPAN.GrpBoxTitle { }
+DIV.GrpBoxBox, .hd-input-tf-gb { background-color: #ecedef; border: 1px solid #b5b5b8; border-radius: 5px; margin-top: 3px; padding: 0.5em; }
+DIV.hd-input-box-disabled { border-color: lightgray; }
+.hd-input { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; border: 1px solid #a0acb7; }
+INPUT.hd-input-readonly /*ReadOnlyStyle*/ { border: 1px solid #d9dce0; background-color: #fafafa; }
+BUTTON.hd-child-btn:hover { border-color: #6dbdd1; }
+BUTTON.hd-child-btn:disabled { border-color: transparent; }
+BUTTON.hd-child-btn DIV { line-height: 20px; }
+.hd-input-text:disabled { color: gray; }
+.hd-text-readonly:disabled { color: #000000; background-color: #ebebeb; }
+option.hd-input-mc-lb-item-readonly { color: #b7b7b7; }
+
+/** Sidebars **/
+.hd-collapse-bar { background-color:#cfd6e5; border:1px solid transparent; }
+.hd-collapse-bar:hover { background-color: #e5decf; }
+.hd-float-title-bar { background-color: #ced3dc; border:1px solid transparent; }
+.hd-sidebar { background-color: #ffffec; border-color:#000000; }
