@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using HotDocs.Sdk;
-using HotDocs.Sdk.Cloud;
+﻿using System.Web.Mvc;
 
 using CloudServicesEmbeddedAPIExample.Models;
-using HotDocs.Sdk.Server.Contracts;
 
 namespace CloudServicesEmbeddedAPIExample.Controllers
 {
@@ -17,19 +10,20 @@ namespace CloudServicesEmbeddedAPIExample.Controllers
         {
             InterviewModel interviewModel = new InterviewModel
             {
-                SessionId = EmbeddedInterview.CreateCloudServicesSession(),
-                Snapshot = false
+                SessionId = EmbeddedInterview.CreateCloudServicesSession()                
             };
 
             return View(interviewModel);
         }
 
         public ActionResult ResumeSession()
-        {
-            var snapshot = EmbeddedInterview.GetSnapshot();
-            ViewBag.Interview = EmbeddedInterview.ResumeCloudServicesSession(snapshot);
+        {            
+            InterviewModel interviewModel = new InterviewModel
+            {
+                SessionId = EmbeddedInterview.ResumeCloudServicesSession()                
+            };
 
-            return View();
+            return View("Index", interviewModel);
         }
 
         public void SaveSnapshot(string snapshot)

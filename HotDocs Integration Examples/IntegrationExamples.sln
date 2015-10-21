@@ -45,8 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample11WebServiceCompo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample3Interview", "CloudServicesAPIExample3Interview\CloudServicesAPIExample3Interview.csproj", "{A66D9DCC-C47A-48AD-A64C-339263375207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesEmbeddedExampleInterview", "CloudServicesEmbeddedExampleInterview\CloudServicesEmbeddedExampleInterview.csproj", "{3CB3FF72-ED32-4BAB-817B-F45A213109B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceExample5InterviewFile", "WebServiceExample5InterviewFile\WebServiceExample5InterviewFile.csproj", "{B196C737-5CAA-4B2A-A7D1-18A177B03F0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample5InterviewFile", "CloudServicesAPIExample5InterviewFile\CloudServicesAPIExample5InterviewFile.csproj", "{083AD508-1192-48EC-BB37-DB2B6B1A72AA}"
@@ -143,10 +141,6 @@ Global
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CB3FF72-ED32-4BAB-817B-F45A213109B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CB3FF72-ED32-4BAB-817B-F45A213109B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CB3FF72-ED32-4BAB-817B-F45A213109B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CB3FF72-ED32-4BAB-817B-F45A213109B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B196C737-5CAA-4B2A-A7D1-18A177B03F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B196C737-5CAA-4B2A-A7D1-18A177B03F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B196C737-5CAA-4B2A-A7D1-18A177B03F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU

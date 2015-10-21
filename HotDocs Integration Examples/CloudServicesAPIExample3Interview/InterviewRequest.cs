@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +16,10 @@ namespace CloudServicesAPIExample3Interview
             var interviewResponse = GetInterviewResponse();
 
             //Retrieve the multipart file stream containing interview files
-            var interviewMultipartStream = GetMultipartStream(interviewResponse);
+            var individualInterviewFileStreams = GetIndividualStreamsFromMultipartStream(interviewResponse);
 
             // Extract the interview files
-            var interviewFiles = GetInterviewFiles(interviewMultipartStream.Result);
+            var interviewFiles = GetInterviewFilesFromStream(individualInterviewFileStreams.Result);
 
             // Save the Template File JavaScript to the temp folder
             SaveInterviewFilesToTempDirectory(interviewFiles.Result);
@@ -44,48 +42,49 @@ namespace CloudServicesAPIExample3Interview
             var templateName = "";
             var sendPackage = false;
             var billingRef = "";
-            var tempImageUrl = "test";            
+            var tempImageUrl = "http://localhost/HDServerFiles/temp";            
             var settings = new Dictionary<string, string>
             {
                 {"HotDocsJsUrl", "https://cloud.hotdocs.ws/HDServerFiles/6.5/js/"},
                 {"HotDocsCssUrl", "https://cloud.hotdocs.ws/HDServerFiles/6.5/stylesheets/hdsuser.css"}, 
                 {"InterviewDefUrl", "http://localhost/CloudServicesAPIExample3Interview/Home/InterviewDefinition/"}, 
-                {"SaveAnswersPageUrl", "http://localhost/examplehostapplication/save/"},                
-                {"FormActionUrl", "InterviewFinish"}
+                {"SaveAnswersPageUrl", "http://localhost/CloudServicesAPIExample3Interview/Home/SaveAnswers/"},                
+                {"FormActionUrl", "http://localhost/CloudServicesAPIExample3Interview/Home/InterviewFinish/"}
             };
 
             // Generate HMAC using Cloud Services signing key            
-            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, tempImageUrl, settings);
+            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, tempImageUrl, settings);            
 
             // Create assemble request            
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format, tempImageUrl, settings);
 
             //Send assemble request to Cloud Services
             var client = new HttpClient();
-            var response = client.SendAsync(request);            
+            var response = client.SendAsync(request);        
+    
             return response.Result;
         }
 
-        static async Task<IEnumerable<HttpContent>> GetMultipartStream(HttpResponseMessage response)
+        static async Task<IEnumerable<HttpContent>> GetIndividualStreamsFromMultipartStream(HttpResponseMessage response)
         {
-            IEnumerable<HttpContent> individualFileStreams = null;
+            IEnumerable<HttpContent> individualInterviewFileStreams = null;
             Task.Factory.StartNew(
-                () => individualFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents
+                () => individualInterviewFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents
             ).Wait();
 
-            return individualFileStreams;
+            return individualInterviewFileStreams;
         }
 
-        static async Task<Dictionary<string, string>> GetInterviewFiles(IEnumerable<HttpContent> multipartStream)
+        static async Task<Dictionary<string, string>> GetInterviewFilesFromStream(IEnumerable<HttpContent> individualInterviewFileStreams)
         {
-            Dictionary<string, string> streams = new Dictionary<string, string>();
-            foreach (var attachment in multipartStream)
+            Dictionary<string, string> interviewFiles = new Dictionary<string, string>();
+            foreach (var fileStream in individualInterviewFileStreams)
             {
-                var attachmentContent = await attachment.ReadAsStringAsync();
-                var filename = attachment.Headers.ContentDisposition.FileName;
-                streams.Add(filename, attachmentContent);
+                var fileContent = await fileStream.ReadAsStringAsync();
+                var filename = fileStream.Headers.ContentDisposition.FileName;
+                interviewFiles.Add(filename, fileContent);
             }
-            return streams;
+            return interviewFiles;
         }
 
         private static void SaveInterviewFilesToTempDirectory(Dictionary<string, string> interviewFiles)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 
 namespace CloudServicesEmbeddedAPIExample
 {
@@ -22,11 +21,11 @@ namespace CloudServicesEmbeddedAPIExample
         static readonly string settings = null;
 
         public static string CreateCloudServicesSession()
-        {            
-            // Generate HMAC using Cloud Services signing key
+        {
+            // Generate HMAC using Cloud Services signing key            
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
 
-            // Create Session request            
+            // Create Session request                        
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat);
 
             //Send upload request to Cloud Service
@@ -38,18 +37,21 @@ namespace CloudServicesEmbeddedAPIExample
             var responseContentStream = response.Result.Content;
             var sessionId = responseContentStream.ReadAsStringAsync().Result;
 
-            return sessionId;
+            return sessionId;              
         }
 
-        public static string ResumeCloudServicesSession(string snapshot)
+        public static string ResumeCloudServicesSession()
         {
+            // Get the Interview Snapshot from disk
+            var snapshot = GetSnapshot();
+
             // Generate HMAC using Cloud Services signing key
-            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
+            var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, snapshot);
 
-            // Create Session request            
-            var request = CreateResumeSessionHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat);
+            // Create Session request                       
+            var request = CreateResumeSessionHttpRequestMessage(hmac, subscriberId, packageId, snapshot, timestamp);
 
-            //Send upload request to Cloud Service
+            //Send Create Session request to Cloud Service
             var client = new HttpClient();
             var response = client.SendAsync(request);
             response.Wait();
@@ -67,28 +69,33 @@ namespace CloudServicesEmbeddedAPIExample
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(newSessionUrl),
-                Method = HttpMethod.Post
+                Method = HttpMethod.Post,
+                Content = GetAnswers()
             };
 
             // Add request headers       
-            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));  
+            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));            
             request.Headers.TryAddWithoutValidation("Authorization", hmac);   
             request.Headers.Add("Keep-Alive", "false");
+            request.Headers.TryAddWithoutValidation("Content-Type", "text/xml");
 
             return request;
         }
 
-        private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat)
+        private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, string snapshot, DateTime timestamp)
         {
-            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?interviewFormat={2}&outputformat={3}", subscriberId, packageId, interviewFormat, outputFormat);
+            var resumeSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?date={2}&signature={3}", subscriberId, packageId, timestamp, hmac);
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri(newSessionUrl),
-                Method = HttpMethod.Post
+                RequestUri = new Uri(resumeSessionUrl),
+                Method = HttpMethod.Post,
+                Content = new StringContent(snapshot)
             };
 
             // Add request headers       
             request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            request.Content.Headers.Remove("Content-Type");
+            request.Content.Headers.Add("Content-Type", "text/plain");
             request.Headers.TryAddWithoutValidation("Authorization", hmac);
             request.Headers.Add("Keep-Alive", "false");
 
@@ -110,6 +117,11 @@ namespace CloudServicesEmbeddedAPIExample
                 return System.IO.File.ReadAllText(@"C:\temp\snapshot.txt");
             }
             return "";
+        }
+
+        private static StringContent GetAnswers()
+        {
+            return new StringContent(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""TextExample-t""><TextValue>Hello World</TextValue></Answer></AnswerSet >");
         }
 
         public static string CalculateHMAC(string signingKey, params object[] paramList)

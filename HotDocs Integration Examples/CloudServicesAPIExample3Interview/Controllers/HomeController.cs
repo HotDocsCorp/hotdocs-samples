@@ -15,15 +15,9 @@ namespace CloudServicesAPIExample3Interview.Controllers
 
         public string InterviewDefinition()
         {
-            var templateName = Request.QueryString["template"];
-            var templateJavaScriptFilePath = String.Format(@"\temp\{0}.js", templateName);
-            return System.IO.File.ReadAllText(templateJavaScriptFilePath);
-        }
-
-        public string Stylesheets(string filename)
-        {
-            string stylesheetFilePath = String.Format(@"C:\temp\{0}", filename);
-            return System.IO.File.ReadAllText(stylesheetFilePath);
+            var templateFileName = Request.QueryString["template"];
+            var templateJavaScriptFilePath = String.Format(@"C:\temp\{0}.js", templateFileName);
+            return System.IO.File.ReadAllText(templateJavaScriptFilePath);            
         }
     }
 }

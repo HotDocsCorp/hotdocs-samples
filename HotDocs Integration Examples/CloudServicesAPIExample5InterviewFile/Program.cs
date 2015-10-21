@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CloudServicesAPIExample5InterviewFile
 {
@@ -24,7 +22,7 @@ namespace CloudServicesAPIExample5InterviewFile
             var billingRef = "Example Client, call to GetInterviewFile";
 
             // Generate HMAC using Cloud Services signing key            
-            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, null, true, "");
+            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, null, true, billingRef);
 
             // Create assemble request            
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, fileName, timestamp);
@@ -35,9 +33,7 @@ namespace CloudServicesAPIExample5InterviewFile
 
             // Read Interview File content from Response
             var attachmentContent = response.Result.Content.ReadAsStringAsync();
-            attachmentContent.Wait();
-
-            Console.WriteLine("Status:");
+            attachmentContent.Wait();            
 
             // Save Interview File
             SaveInterviewFilesToTempDirectory(fileName, attachmentContent.Result);

@@ -16,12 +16,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-    
-    <script>
-        function snapshot() {
-            debugger;
-            HD$.GetSnapshot(function (sessionSnapshotData) { $.post("http://localhost:65032/Home/SaveSnapshot/", { snapshot: sessionSnapshotData }); });
-    }
-    </script>
+        
 </body>
 </html>

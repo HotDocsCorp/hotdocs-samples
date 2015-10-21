@@ -15,7 +15,7 @@
     <AssemblyName>CloudServicesEmbeddedAPIExample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -41,26 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HotDocs.Sdk">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Cloud">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Cloud.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Sdk.Server.Contracts">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Sdk.Server.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Server">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="HotDocs.Server.Interop">
-      <HintPath>..\packages\HotDocsOpenSDK.0.10.6-beta\lib\HotDocs.Server.Interop.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -157,6 +137,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\btnswap.png" />
+    <Content Include="Content\Images\btnswaph.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -241,7 +223,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\ResumeSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -267,7 +248,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65032</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:65032/</IISUrl>
+          <IISUrl>http://localhost/CloudServicesEmbeddedAPIExample</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
