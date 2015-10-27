@@ -14,7 +14,7 @@
 <script>
         /* Save an Interview Snapshot */
         function snapshot() {            
-            HD$.GetSnapshot(function (sessionSnapshotData) { $.post("http://localhost:65032/Home/SaveSnapshot/", { snapshot: sessionSnapshotData }); });
+            HD$.GetSnapshot(function (sessionSnapshotData) { $.post("http://CloudServicesEmbeddedAPIExample/Home/SaveSnapshot/", { snapshot: sessionSnapshotData }); });
         }
     
     /* Embedded API Example 3: Interview Options */
