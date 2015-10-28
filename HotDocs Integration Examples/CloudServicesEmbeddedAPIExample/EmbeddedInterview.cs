@@ -18,6 +18,7 @@ namespace CloudServicesEmbeddedAPIExample
         static readonly string billingRef = "";
         static readonly string interviewFormat = "JavaScript";
         static readonly string outputFormat = "DOCX";
+        static readonly bool showDownloadLinks = true;
         static readonly string settings = null;
 
         public static string CreateCloudServicesSession()
@@ -26,7 +27,7 @@ namespace CloudServicesEmbeddedAPIExample
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
 
             // Create Session request                        
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat, showDownloadLinks);
 
             //Send upload request to Cloud Service
             var client = new HttpClient();
@@ -49,7 +50,7 @@ namespace CloudServicesEmbeddedAPIExample
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, snapshot);
 
             // Create Session request                       
-            var request = CreateResumeSessionHttpRequestMessage(hmac, subscriberId, packageId, snapshot, timestamp);
+            var request = CreateResumeSessionHttpRequestMessage(hmac, subscriberId, packageId, snapshot, timestamp, showDownloadLinks);
 
             //Send Create Session request to Cloud Service
             var client = new HttpClient();
@@ -63,9 +64,9 @@ namespace CloudServicesEmbeddedAPIExample
             return sessionId;
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat, bool showDownloadLinks)
         {
-            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/newsession/{0}/{1}?interviewFormat={2}&outputformat={3}", subscriberId, packageId, interviewFormat, outputFormat);
+            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/newsession/{0}/{1}?interviewFormat={2}&outputformat={3}&showdownloadlinks={4}", subscriberId, packageId, interviewFormat, outputFormat, showDownloadLinks);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(newSessionUrl),
@@ -82,9 +83,9 @@ namespace CloudServicesEmbeddedAPIExample
             return request;
         }
 
-        private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, string snapshot, DateTime timestamp)
+        private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, string snapshot, DateTime timestamp, bool showDownloadLinks)
         {
-            var resumeSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?date={2}&signature={3}", subscriberId, packageId, timestamp, hmac);
+            var resumeSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?date={2}&signature={3}&showdownloadlinks={4}", subscriberId, packageId, timestamp, hmac, showDownloadLinks);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(resumeSessionUrl),
