@@ -53,7 +53,7 @@ namespace WebServiceExample1Upload
         //Create new Http Request
         private static HttpRequestMessage CreateHttpRequestMessage(string subscriberId, string packageId)
         {
-            var uploadUrl = String.Format("http://localhost:80/opapi/api/HDCS/{0}/{1}", subscriberId, packageId);
+            var uploadUrl = String.Format("http://localhost:80/HDSWEBAPI/api/hdcs/{0}/{1}", subscriberId, packageId);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(uploadUrl),
@@ -68,7 +68,7 @@ namespace WebServiceExample1Upload
         //Upload a template with a filename
         private static StreamContent CreateFileContent()
         {
-            const string filePath = @"C:\temp\HelloWorld3.hdpkg";
+            const string filePath = @"C:\temp\HelloWorld.hdpkg";
             var stream = File.OpenRead(filePath);
 
             var fileContent = new StreamContent(stream);
