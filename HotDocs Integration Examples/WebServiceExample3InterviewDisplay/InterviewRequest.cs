@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebServiceExample3InterviewDisplay
@@ -22,17 +24,20 @@ namespace WebServiceExample3InterviewDisplay
             return interviewFiles.Result;
         }
 
-        static async Task<IEnumerable<HttpContent>> GetMultipartStream(HttpResponseMessage response)
+        private async Task<IEnumerable<HttpContent>> GetMultipartStream(HttpResponseMessage response)
         {
-            IEnumerable<HttpContent> individualFileStreams = null;
+            var individualFileStreams = Enumerable.Empty<HttpContent>();
             Task.Factory.StartNew(
-                () => individualFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents
+                () => individualFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents,
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
             ).Wait();
 
-            return individualFileStreams;            
+            return individualFileStreams;
         }
 
-        static async Task<string> GetInterviewFiles(IEnumerable<HttpContent> multipartStream)
+        private async Task<string> GetInterviewFiles(IEnumerable<HttpContent> multipartStream)
         {            
             foreach (var attachment in multipartStream)
             {
@@ -71,7 +76,7 @@ namespace WebServiceExample3InterviewDisplay
             return response.Result;
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string interviewUrl)
+        private HttpRequestMessage CreateHttpRequestMessage(string interviewUrl)
         {                       
             var request = new HttpRequestMessage
             {
@@ -88,7 +93,7 @@ namespace WebServiceExample3InterviewDisplay
             return request;
         }
 
-        private static string CreateInterviewUrl(string subscriberId, string packageId, string format, string tempImageUrl, Dictionary<string, string> settings)
+        private string CreateInterviewUrl(string subscriberId, string packageId, string format, string tempImageUrl, Dictionary<string, string> settings)
         {
             var partialInterviewUrl = string.Format("http://localhost:80/HDSWebAPI/api/hdcs/interview/{0}/{1}?format={2}&tempimageurl={3}", subscriberId, packageId, format, tempImageUrl);
             var completedInterviewUrlBuilder = new StringBuilder(partialInterviewUrl);
@@ -101,7 +106,7 @@ namespace WebServiceExample3InterviewDisplay
         }
 
 
-        private static StringContent GetAnswers()
+        private StringContent GetAnswers()
         {
             return new StringContent(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""TextExample-t""><TextValue>Hello World</TextValue></Answer></AnswerSet >");
         }

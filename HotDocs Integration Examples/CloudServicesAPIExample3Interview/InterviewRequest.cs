@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CloudServicesAPIExample3Interview
@@ -65,17 +66,20 @@ namespace CloudServicesAPIExample3Interview
             return response.Result;
         }
 
-        static async Task<IEnumerable<HttpContent>> GetIndividualStreamsFromMultipartStream(HttpResponseMessage response)
+        private async Task<IEnumerable<HttpContent>> GetIndividualStreamsFromMultipartStream(HttpResponseMessage response)
         {
-            IEnumerable<HttpContent> individualInterviewFileStreams = null;
+            var individualInterviewFileStreams = Enumerable.Empty<HttpContent>();
             Task.Factory.StartNew(
-                () => individualInterviewFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents
+                () => individualInterviewFileStreams = response.Content.ReadAsMultipartAsync().Result.Contents,
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
             ).Wait();
 
             return individualInterviewFileStreams;
         }
 
-        static async Task<Dictionary<string, string>> GetInterviewFilesFromStream(IEnumerable<HttpContent> individualInterviewFileStreams)
+        private async Task<Dictionary<string, string>> GetInterviewFilesFromStream(IEnumerable<HttpContent> individualInterviewFileStreams)
         {
             Dictionary<string, string> interviewFiles = new Dictionary<string, string>();
             foreach (var fileStream in individualInterviewFileStreams)
@@ -87,7 +91,7 @@ namespace CloudServicesAPIExample3Interview
             return interviewFiles;
         }
 
-        private static void SaveInterviewFilesToTempDirectory(Dictionary<string, string> interviewFiles)
+        private void SaveInterviewFilesToTempDirectory(Dictionary<string, string> interviewFiles)
         {
             foreach (var file in interviewFiles)
             {
@@ -96,7 +100,7 @@ namespace CloudServicesAPIExample3Interview
             }
         } 
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format, string tempImageUrl, Dictionary<string, string> settings)
+        private HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format, string tempImageUrl, Dictionary<string, string> settings)
         {
             var partialInterviewUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interview/{0}/{1}?format={2}&tempimageurl={3}", subscriberId, packageId, format, tempImageUrl);
             var completedInterviewUrlBuilder = new StringBuilder(partialInterviewUrl);
@@ -124,12 +128,12 @@ namespace CloudServicesAPIExample3Interview
             return request;
         }
 
-        private static StringContent GetAnswers()
+        private StringContent GetAnswers()
         {
             return new StringContent(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><AnswerSet version=""1.1""><Answer name=""TextExample-t""><TextValue>Hello World</TextValue></Answer></AnswerSet >");
         }
 
-        private static string CalculateHMAC(string signingKey, params object[] paramList)
+        private string CalculateHMAC(string signingKey, params object[] paramList)
         {
             byte[] key = Encoding.UTF8.GetBytes(signingKey);
             string stringToSign = CanonicalizeParameters(paramList);
@@ -144,7 +148,7 @@ namespace CloudServicesAPIExample3Interview
             return Convert.ToBase64String(signature);
         }
 
-        private static string CanonicalizeParameters(params object[] paramList)
+        private string CanonicalizeParameters(params object[] paramList)
         {
             if (paramList == null)
             {
