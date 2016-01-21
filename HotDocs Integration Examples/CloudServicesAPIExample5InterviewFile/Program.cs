@@ -47,7 +47,7 @@ namespace CloudServicesAPIExample5InterviewFile
 
         private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, string fileName, DateTime timestamp)
         {
-            var interviewFileUrl = string.Format("https://test.hotdocs.ws/hdcs/interviewfile/{0}/{1}?filename={2}", subscriberId, packageId, fileName);
+            var interviewFileUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interviewfile/{0}/{1}?filename={2}", subscriberId, packageId, fileName);
 
             var request = new HttpRequestMessage
             {

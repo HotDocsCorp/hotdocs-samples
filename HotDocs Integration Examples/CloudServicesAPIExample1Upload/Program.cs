@@ -40,7 +40,7 @@ namespace CloudServicesAPIExample1Upload
         
         private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp)
         {
-            var uploadUrl = string.Format("https://cloud.hotdocs.ws/hdcs/{0}/{1}?signature={2}", subscriberId, packageId, hmac);
+            var uploadUrl = string.Format("https://cloud.hotdocs.ws/hdcs/{0}/{1}", subscriberId, packageId);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(uploadUrl),
@@ -49,9 +49,9 @@ namespace CloudServicesAPIExample1Upload
             };
             
             // Add request headers
-            request.Content.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            request.Headers.Add("x-hd-date", timestamp.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             request.Content.Headers.Add("Content-Type", "application/binary");
-            request.Content.Headers.TryAddWithoutValidation("Authorization", hmac);           
+            request.Headers.TryAddWithoutValidation("Authorization", hmac);           
 
             return request;
         }

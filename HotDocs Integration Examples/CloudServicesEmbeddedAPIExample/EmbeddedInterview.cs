@@ -85,7 +85,7 @@ namespace CloudServicesEmbeddedAPIExample
 
         private static HttpRequestMessage CreateResumeSessionHttpRequestMessage(string hmac, string subscriberId, string packageId, string snapshot, DateTime timestamp, bool showDownloadLinks)
         {
-            var resumeSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?date={2}&signature={3}&showdownloadlinks={4}", subscriberId, packageId, timestamp, hmac, showDownloadLinks);
+            var resumeSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/resumesession/{0}/{1}?date={2}&showdownloadlinks={3}", subscriberId, packageId, timestamp, showDownloadLinks);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(resumeSessionUrl),
