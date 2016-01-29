@@ -18,16 +18,16 @@ namespace CloudServicesAPIExample4ComponentInfo
             // HMAC calculation data
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
-            string templateName = null;
+            string templateName = "";
             var sendPackage = false;
-            var billingRef = "";
+            var billingRef = "ExampleBillingRef";
             var includeDialogs = false;            
 
             // Generate HMAC using Cloud Services signing key
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, includeDialogs);
 
             // Create component information request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, includeDialogs);                        
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, billingRef, includeDialogs);                        
 
             // Send component information request to Cloud Service
             var client = new HttpClient();            
@@ -48,9 +48,9 @@ namespace CloudServicesAPIExample4ComponentInfo
             return responseStream.ReadAsStringAsync().Result;
         }
         
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, bool includeDialogs)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string billingRef, bool includeDialogs)
         {
-            var componentInfoUrl = string.Format("https://cloud.hotdocs.ws/hdcs/componentinfo/{0}/{1}?includeDialogs={2}", subscriberId, packageId, includeDialogs);
+            var componentInfoUrl = string.Format("https://cloud.hotdocs.ws/hdcs/componentinfo/{0}/{1}?billingRef={2}&includeDialogs={3}", subscriberId, packageId, billingRef, includeDialogs);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(componentInfoUrl),

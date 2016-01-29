@@ -22,7 +22,7 @@ namespace CloudServicesAPIExample2DocumentAssembly
             var format = "Native";
             var templateName = "";
             var sendPackage = false;
-            var billingRef = "";
+            var billingRef = "ExampleBillingRef";
             Dictionary<string, string> settings = new Dictionary<string, string>
             {
                 {"UnansweredFormat", "[Variable]"}
@@ -32,7 +32,7 @@ namespace CloudServicesAPIExample2DocumentAssembly
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, settings);
 
             // Create assemble request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format, settings);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, templateName, timestamp, format, billingRef, settings);
 
             // Send assemble request to Cloud Services
             var client = new HttpClient();            
@@ -46,9 +46,9 @@ namespace CloudServicesAPIExample2DocumentAssembly
             Console.ReadKey();  
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format, Dictionary<string, string> settings)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, string templateName, DateTime timestamp, string format, string billingRef, Dictionary<string, string> settings)
         {
-            var assembleUrl = CreateAssembleUrl(subscriberId, packageId, format, settings);
+            var assembleUrl = CreateAssembleUrl(subscriberId, packageId, templateName, format, billingRef, settings);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(assembleUrl),
@@ -65,9 +65,9 @@ namespace CloudServicesAPIExample2DocumentAssembly
             return request;
         }
 
-        private static string CreateAssembleUrl(string subscriberId, string packageId, string format, Dictionary<string, string> settings)
+        private static string CreateAssembleUrl(string subscriberId, string packageId, string templateName, string format, string billingRef, Dictionary<string, string> settings)
         {
-            var assembleUrl = string.Format("https://cloud.hotdocs.ws/hdcs/assemble/{0}/{1}?format={2}", subscriberId, packageId, format);
+            var assembleUrl = string.Format("https://cloud.hotdocs.ws/hdcs/assemble/{0}/{1}/{2}?billingRef={3}&format={4}", subscriberId, packageId, templateName, billingRef, format);
 
             var assembleUrlWithSettings = new StringBuilder(assembleUrl);
             foreach (var kv in settings)

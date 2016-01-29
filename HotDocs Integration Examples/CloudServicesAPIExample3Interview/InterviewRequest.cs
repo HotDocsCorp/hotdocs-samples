@@ -42,7 +42,7 @@ namespace CloudServicesAPIExample3Interview
             var format = "JavaScript";
             var templateName = "";
             var sendPackage = false;
-            var billingRef = "";
+            var billingRef = "ExampleBillingRef";
             var tempImageUrl = "http://localhost/HDServerFiles/temp";            
             var settings = new Dictionary<string, string>
             {
@@ -57,7 +57,7 @@ namespace CloudServicesAPIExample3Interview
             string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef, format, tempImageUrl, settings);            
 
             // Create assemble request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, format, tempImageUrl, settings);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, billingRef, format, tempImageUrl, settings);
 
             //Send assemble request to Cloud Services
             var client = new HttpClient();
@@ -100,9 +100,9 @@ namespace CloudServicesAPIExample3Interview
             }
         } 
 
-        private HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string format, string tempImageUrl, Dictionary<string, string> settings)
+        private HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string billingRef, string format, string tempImageUrl, Dictionary<string, string> settings)
         {
-            var partialInterviewUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interview/{0}/{1}?format={2}&tempimageurl={3}", subscriberId, packageId, format, tempImageUrl);
+            var partialInterviewUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interview/{0}/{1}?billingRef={2}&format={3}&tempimageurl={4}", subscriberId, packageId, billingRef, format, tempImageUrl);
             var completedInterviewUrlBuilder = new StringBuilder(partialInterviewUrl);
 
             foreach (var kv in settings)

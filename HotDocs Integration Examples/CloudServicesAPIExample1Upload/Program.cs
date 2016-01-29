@@ -20,15 +20,15 @@ namespace CloudServicesAPIExample1Upload
             // HMAC calculation data
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
-            string templateName = null;
+            string templateName = "";
             var sendPackage = true;
-            var billingRef = "";
+            var billingRef = "ExampleBillingRef";
 
             // Generate HMAC using Cloud Services signing key
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, templateName, sendPackage, billingRef);
 
             // Create upload request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp);                        
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, billingRef);                        
 
             //Send upload request to Cloud Service
             var client = new HttpClient();            
@@ -38,9 +38,9 @@ namespace CloudServicesAPIExample1Upload
             Console.ReadKey();                             
         }        
         
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string billingRef)
         {
-            var uploadUrl = string.Format("https://cloud.hotdocs.ws/hdcs/{0}/{1}", subscriberId, packageId);
+            var uploadUrl = string.Format("https://cloud.hotdocs.ws/hdcs/{0}/{1}?billingRef={2}", subscriberId, packageId, billingRef);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(uploadUrl),

@@ -19,13 +19,13 @@ namespace CloudServicesAPIExample5InterviewFile
             var timestamp = DateTime.UtcNow;
             var packageId = "HelloWorld";
             var fileName = "HelloWorld.docx.js";
-            var billingRef = "Example Client, call to GetInterviewFile";
+            var billingRef = "ExampleBillingRef";
 
             // Generate HMAC using Cloud Services signing key            
             string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, null, true, billingRef);
 
             // Create assemble request            
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, fileName, timestamp);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, fileName, timestamp, billingRef);
 
             //Send assemble request to Cloud Services
             var client = new HttpClient();
@@ -45,9 +45,9 @@ namespace CloudServicesAPIExample5InterviewFile
             File.WriteAllText(filePath, interviewFileContent);
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, string fileName, DateTime timestamp)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, string fileName, DateTime timestamp, string billingRef)
         {
-            var interviewFileUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interviewfile/{0}/{1}?filename={2}", subscriberId, packageId, fileName);
+            var interviewFileUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interviewfile/{0}/{1}?filename={2}&billingRef={3}", subscriberId, packageId, fileName, billingRef);
 
             var request = new HttpRequestMessage
             {
