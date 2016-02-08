@@ -17,7 +17,7 @@ namespace CloudServicesAPIExample5InterviewFile
 
             // HMAC calculation data      
             var timestamp = DateTime.UtcNow;
-            var packageId = "HelloWorld";
+            var packageId = "ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29";
             var fileName = "HelloWorld.docx.js";
             var billingRef = "ExampleBillingRef";
 

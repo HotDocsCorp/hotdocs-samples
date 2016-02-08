@@ -14,8 +14,8 @@ namespace CloudServicesEmbeddedAPIExample
 
         // HMAC calculation data
         static readonly DateTime timestamp = DateTime.UtcNow;
-        static readonly string packageId = "HelloWorld";
-        static readonly string billingRef = "";
+        static readonly string packageId = "ed40775b-5e7d-4a51-b4d1-32bf9d6e9e29";
+        static readonly string billingRef = "ExampleBillingRef";
         static readonly string interviewFormat = "JavaScript";
         static readonly string outputFormat = "DOCX";
         static readonly bool showDownloadLinks = true;
@@ -27,7 +27,7 @@ namespace CloudServicesEmbeddedAPIExample
             var hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, billingRef, interviewFormat, outputFormat, settings);
 
             // Create Session request                        
-            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat, showDownloadLinks);
+            var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, timestamp, interviewFormat, outputFormat, showDownloadLinks, billingRef);
 
             //Send upload request to Cloud Service
             var client = new HttpClient();
@@ -64,9 +64,9 @@ namespace CloudServicesEmbeddedAPIExample
             return sessionId;
         }
 
-        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat, bool showDownloadLinks)
+        private static HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string interviewFormat, string outputFormat, bool showDownloadLinks, string billingRef)
         {
-            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/newsession/{0}/{1}?interviewFormat={2}&outputformat={3}&showdownloadlinks={4}", subscriberId, packageId, interviewFormat, outputFormat, showDownloadLinks);
+            var newSessionUrl = string.Format("https://cloud.hotdocs.ws/embed/newsession/{0}/{1}?interviewFormat={2}&outputformat={3}&showdownloadlinks={4}&billingRef={5}", subscriberId, packageId, interviewFormat, outputFormat, showDownloadLinks, billingRef);
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri(newSessionUrl),
