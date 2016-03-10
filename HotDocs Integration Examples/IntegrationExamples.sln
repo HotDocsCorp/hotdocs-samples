@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample5Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesEmbeddedAPIExample", "CloudServicesEmbeddedAPIExample\CloudServicesEmbeddedAPIExample.csproj", "{0DD858BF-3E4E-4835-85EB-F370A9EF48FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExampleRetrieveFromHub", "CloudServicesAPIExampleRetrieveFromHub\CloudServicesAPIExampleRetrieveFromHub.csproj", "{3127F069-57C1-4B72-B362-24211739F0F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{0DD858BF-3E4E-4835-85EB-F370A9EF48FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DD858BF-3E4E-4835-85EB-F370A9EF48FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DD858BF-3E4E-4835-85EB-F370A9EF48FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3127F069-57C1-4B72-B362-24211739F0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3127F069-57C1-4B72-B362-24211739F0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3127F069-57C1-4B72-B362-24211739F0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3127F069-57C1-4B72-B362-24211739F0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
