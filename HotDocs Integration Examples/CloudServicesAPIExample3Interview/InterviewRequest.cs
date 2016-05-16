@@ -102,7 +102,7 @@ namespace CloudServicesAPIExample3Interview
 
         private HttpRequestMessage CreateHttpRequestMessage(string hmac, string subscriberId, string packageId, DateTime timestamp, string billingRef, string format, string tempImageUrl, Dictionary<string, string> settings)
         {
-            var partialInterviewUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interview/{0}/{1}?billingRef={2}&format={3}&tempimageurl={4}", subscriberId, packageId, billingRef, format, tempImageUrl);
+            var partialInterviewUrl = string.Format("https://cloud.hotdocs.ws/hdcs/interview/{0}/{1}?billingRef={2}&format={3}&tempimageurl={4}&encodeFileNames=True", subscriberId, packageId, billingRef, format, tempImageUrl);
             var completedInterviewUrlBuilder = new StringBuilder(partialInterviewUrl);
 
             foreach (var kv in settings)

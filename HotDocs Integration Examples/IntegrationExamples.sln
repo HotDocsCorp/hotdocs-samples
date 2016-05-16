@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample1DocumentAssembly", "SdkExample1DocumentAssembly\SdkExample1DocumentAssembly.csproj", "{4C7A0ED3-BBB4-4E21-A30B-177014BEFC57}"
 EndProject
@@ -34,14 +34,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceExample4ComponentInfo", "WebServiceExample4ComponentInfo\WebServiceExample4ComponentInfo.csproj", "{F18515EA-FB50-414E-9F08-85FBB66649A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample4ComponentInfo", "CloudServicesAPIExample4ComponentInfo\CloudServicesAPIExample4ComponentInfo.csproj", "{7C62B2DA-BD17-4233-885F-93F88E2990F5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample8WebServiceUpload", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample8WebServiceUpload\SdkExample8WebServiceUpload.csproj", "{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample9WebServiceDocumentAssembly", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample9WebServiceDocumentAssembly\SdkExample9WebServiceDocumentAssembly.csproj", "{8831A470-271F-496D-B6E6-3257F1E85D37}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample10WebServiceInterviewDisplay", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample10WebServiceInterviewDisplay\SdkExample10WebServiceInterviewDisplay.csproj", "{68FF7AD5-91BF-429A-8407-A0094569A998}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkExample11WebServiceComponentInfo", "..\..\..\..\Visual Studio 2013\Projects\OldWebServiceExamples\SdkExample11WebServiceComponentInfo\SdkExample11WebServiceComponentInfo.csproj", "{1F4064F5-1C78-433D-A336-F893FBCCC5B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudServicesAPIExample3Interview", "CloudServicesAPIExample3Interview\CloudServicesAPIExample3Interview.csproj", "{A66D9DCC-C47A-48AD-A64C-339263375207}"
 EndProject
@@ -123,22 +115,6 @@ Global
 		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C62B2DA-BD17-4233-885F-93F88E2990F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65D7996D-6668-4EB1-A3D3-3A5A3FEDA699}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8831A470-271F-496D-B6E6-3257F1E85D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8831A470-271F-496D-B6E6-3257F1E85D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8831A470-271F-496D-B6E6-3257F1E85D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8831A470-271F-496D-B6E6-3257F1E85D37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68FF7AD5-91BF-429A-8407-A0094569A998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68FF7AD5-91BF-429A-8407-A0094569A998}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68FF7AD5-91BF-429A-8407-A0094569A998}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68FF7AD5-91BF-429A-8407-A0094569A998}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F4064F5-1C78-433D-A336-F893FBCCC5B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66D9DCC-C47A-48AD-A64C-339263375207}.Release|Any CPU.ActiveCfg = Release|Any CPU

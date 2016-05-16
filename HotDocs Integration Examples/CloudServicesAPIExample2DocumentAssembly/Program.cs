@@ -67,7 +67,7 @@ namespace CloudServicesAPIExample2DocumentAssembly
 
         private static string CreateAssembleUrl(string subscriberId, string packageId, string templateName, string format, string billingRef, Dictionary<string, string> settings)
         {
-            var assembleUrl = string.Format("https://cloud.hotdocs.ws/hdcs/assemble/{0}/{1}/{2}?billingRef={3}&format={4}", subscriberId, packageId, templateName, billingRef, format);
+            var assembleUrl = string.Format("https://cloud.hotdocs.ws/hdcs/assemble/{0}/{1}/{2}?billingRef={3}&format={4}&encodeFileNames=True", subscriberId, packageId, templateName, billingRef, format);
 
             var assembleUrlWithSettings = new StringBuilder(assembleUrl);
             foreach (var kv in settings)
