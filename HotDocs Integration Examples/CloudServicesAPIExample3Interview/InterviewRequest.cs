@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
+using System.Drawing;
 
 namespace CloudServicesAPIExample3Interview
 {
@@ -26,7 +28,7 @@ namespace CloudServicesAPIExample3Interview
             SaveInterviewFilesToTempDirectory(interviewFiles.Result);
             
             // Retrieve the Interview HTML fragment
-            var interviewHtmlFragment = interviewFiles.Result["fragment.txt"];
+            var interviewHtmlFragment = File.ReadAllText(String.Format(@"C:\temp\fragment.txt"));
             return interviewHtmlFragment;
         }                   
 
@@ -43,7 +45,7 @@ namespace CloudServicesAPIExample3Interview
             var templateName = "";
             var sendPackage = false;
             var billingRef = "ExampleBillingRef";
-            var tempImageUrl = "http://localhost/HDServerFiles/temp";            
+            var tempImageUrl = "http://localhost/HDInterviewFiles/";  // IIS application must use the physical path to which interview files are saved, i.e. C:\temp\
             var settings = new Dictionary<string, string>
             {
                 {"HotDocsJsUrl", "https://cloud.hotdocs.ws/HDServerFiles/6.5/js/"},
@@ -79,24 +81,36 @@ namespace CloudServicesAPIExample3Interview
             return individualInterviewFileStreams;
         }
 
-        private async Task<Dictionary<string, string>> GetInterviewFilesFromStream(IEnumerable<HttpContent> individualInterviewFileStreams)
+        private async Task<Dictionary<string, Stream>> GetInterviewFilesFromStream(IEnumerable<HttpContent> individualInterviewFileStreams)
         {
-            Dictionary<string, string> interviewFiles = new Dictionary<string, string>();
+            Dictionary<string, Stream> interviewFiles = new Dictionary<string, Stream>();
             foreach (var fileStream in individualInterviewFileStreams)
             {
-                var fileContent = await fileStream.ReadAsStringAsync();
+                var fileContent = await fileStream.ReadAsStreamAsync();
                 var filename = fileStream.Headers.ContentDisposition.FileName;
                 interviewFiles.Add(filename, fileContent);
             }
             return interviewFiles;
         }
 
-        private void SaveInterviewFilesToTempDirectory(Dictionary<string, string> interviewFiles)
+        private void SaveInterviewFilesToTempDirectory(Dictionary<string, Stream> interviewFiles)
         {
             foreach (var file in interviewFiles)
-            {
-                var filePath = String.Format(@"C:\temp\{0}", file.Key);
-                File.WriteAllText(filePath, file.Value);
+            {                
+                var decodedFileName = HttpUtility.UrlDecode(file.Key);
+
+                var fileExtension = Path.GetExtension(file.Key);
+                if (fileExtension == ".gif" || fileExtension == ".bmp" || fileExtension == ".jpg")
+                {                   
+                        var image = Image.FromStream(file.Value);
+                        image.Save(@"C:\temp\" + decodedFileName);                 
+                }
+                else
+                {
+                    var filePath = String.Format(@"C:\temp\{0}", decodedFileName);
+                    var textContent = new StreamReader(file.Value, Encoding.UTF8).ReadToEnd();
+                    File.WriteAllText(filePath, textContent);
+                }
             }
         } 
 
