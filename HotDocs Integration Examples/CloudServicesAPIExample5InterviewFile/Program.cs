@@ -22,7 +22,7 @@ namespace CloudServicesAPIExample5InterviewFile
             var billingRef = "ExampleBillingRef";
 
             // Generate HMAC using Cloud Services signing key            
-            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, null, true, billingRef);
+            string hmac = CalculateHMAC(signingKey, timestamp, subscriberId, packageId, fileName, billingRef);
 
             // Create assemble request            
             var request = CreateHttpRequestMessage(hmac, subscriberId, packageId, fileName, timestamp, billingRef);
@@ -33,7 +33,7 @@ namespace CloudServicesAPIExample5InterviewFile
 
             // Read Interview File content from Response
             var attachmentContent = response.Result.Content.ReadAsStringAsync();
-            attachmentContent.Wait();            
+            attachmentContent.Wait();
 
             // Save Interview File
             SaveInterviewFilesToTempDirectory(fileName, attachmentContent.Result);
